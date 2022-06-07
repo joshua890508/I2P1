@@ -9,7 +9,17 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-
+enum {
+	SCENE_MENU = 1,
+	SCENE_GAME = 2,
+	SCENE_ABOUT = 3,
+    SCENE_HOWTOPLAY = 4,
+    SCENE_STORE = 5,
+    SCENE_ITEM = 6,
+    SCENE_PAUSE = 7,
+    SCENE_WIN = 8,
+    SCENE_GAMEOVER = 9,
+};
 // note that you can't assign initial value here!
 extern const float FPS;
 extern const int WIDTH;

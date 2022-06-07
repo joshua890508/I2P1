@@ -1,21 +1,17 @@
 #include "scene.h"
 
-enum {
-	SCENE_MENU = 1,
-	SCENE_GAME = 2,
-	SCENE_ABOUT = 3,
-    SCENE_HOWTOPLAY = 4,
-    SCENE_STORE = 5,
-    SCENE_ITEM = 6,
-    SCENE_WIN = 7,
-    SCENE_PAUSE = 8,
-    SCENE_GAMEOVER = 9,
-};
-
 int mouse_x, mouse_y;
 ALLEGRO_FONT *font = NULL;
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_BITMAP *ABOUT = NULL;
+
+bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
+	if (px < w && py > y) {
+        if(px > x && py < h) return true;
+        else return false;
+	}
+	else return false;
+}
 
 void menu_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_UP )
@@ -65,14 +61,22 @@ void store_process(ALLEGRO_EVENT event){
         }
     }
 }
-
-bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
-	if (px < w && py > y) {
-        if(px > x && py < h) return true;
-        else return false;
-	}
-	else return false;
+void pause_process(ALLEGRO_EVENT event){
+    if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+            mouse_state[event.mouse.button] = true;
+			on_mouse_down(event.mouse.button, event.mouse.x, event.mouse.y);
+    }
+    if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+			mouse_state[event.mouse.button] = false;
+    }
+    if (event.type == ALLEGRO_EVENT_MOUSE_AXES) {
+        if (event.mouse.dx != 0 || event.mouse.dy != 0) {
+            mouse_x = event.mouse.x;
+            mouse_y = event.mouse.y;
+        }
+    }
 }
+
 
 void on_mouse_down(int btn, int x, int y) {
 	if (btn == 1) {
@@ -101,12 +105,35 @@ void on_mouse_down(int btn, int x, int y) {
         }
         else if (window == SCENE_STORE)
         {
-            if (pnt_in_rect(x, y, 0, 0, 285, 280)){
+            if (pnt_in_rect(x, y, 0, 0, 120, 280)){
                 judge_next_window = true;
                 next=SCENE_MENU;
             }else if (pnt_in_rect(x, y, 285, 280, 383, 330)){
                 judge_next_window = true;
                 next=SCENE_ITEM;
+            }
+        }
+        else if (window == SCENE_ITEM)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 120, 280)){
+                judge_next_window = true;
+                next=SCENE_MENU;
+            }else if (pnt_in_rect(x, y, 120, 280, 265, 330)){
+                judge_next_window = true;
+                next=SCENE_STORE;
+            }
+        }
+        else if (window == SCENE_PAUSE)
+        {
+            if (pnt_in_rect(x, y, 300, 450, 600, 900)){
+                judge_next_window = true;
+                next=SCENE_MENU;
+            }else if (pnt_in_rect(x, y, 0, 450, 300, 900)){
+                judge_next_window = true;
+                next=SCENE_STORE;
+            }else if (pnt_in_rect(x, y, 300, 0, 600, 450)){
+                judge_next_window = true;
+                next=SCENE_HOWTOPLAY;
             }
         }
 	}
@@ -127,7 +154,7 @@ void game_scene2_init(){
     character_init();
 }
 void game_scene2_draw(){
-    background = al_load_bitmap("./image/stage.jpg");
+    background = al_load_bitmap("./image/Game_backgound.jpg");
     al_draw_bitmap(background, 0, 0, 0);
     character_draw();
 }
@@ -173,5 +200,15 @@ void game_scene6_draw(){
     al_draw_bitmap(ABOUT, 0, 0, 0);
 }
 void game_scene6_destroy(){
+    al_destroy_bitmap(ABOUT);
+}
+
+void game_scene7_init(){
+    ABOUT = al_load_bitmap("./image/Pause.jpg");
+}
+void game_scene7_draw(){
+    al_draw_bitmap(ABOUT, 0, 0, 0);
+}
+void game_scene7_destroy(){
     al_destroy_bitmap(ABOUT);
 }

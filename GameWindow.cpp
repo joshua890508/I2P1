@@ -1,21 +1,9 @@
 #include "GameWindow.h"
 
-enum {
-	SCENE_MENU = 1,
-	SCENE_GAME = 2,
-	SCENE_ABOUT = 3,
-    SCENE_HOWTOPLAY = 4,
-    SCENE_STORE = 5,
-    SCENE_ITEM = 6,
-    SCENE_WIN = 7,
-    SCENE_PAUSE = 8,
-    SCENE_GAMEOVER = 9,
-};
-
 bool draw = false;
 int window = SCENE_MENU;
 
-const char *title = "Final Project 10xxxxxxx";
+const char *title = "LONG LONG FRIENDS";
 
 // ALLEGRO Variables
 ALLEGRO_DISPLAY* display = NULL;
@@ -48,7 +36,7 @@ void game_init() {
     // create event queue
     event_queue = al_create_event_queue();
     // Initialize Allegro settings
-    al_set_window_position(display, 0, 0);
+    al_set_window_position(display, 600, 30);
     al_set_window_title(display, title);
     al_init_primitives_addon();
     al_init_font_addon(); // initialize the font addon
@@ -64,7 +52,7 @@ void game_init() {
     al_register_event_source(event_queue, al_get_mouse_event_source());
     fps  = al_create_timer( 1.0 / FPS );
     al_register_event_source(event_queue, al_get_timer_event_source( fps )) ;
-
+    // mouse
     const unsigned m_buttons = al_get_mouse_num_buttons();
 	mouse_state = (bool*)malloc((m_buttons + 1) * sizeof(bool));
 	memset(mouse_state, false, (m_buttons + 1) * sizeof(bool));
@@ -135,6 +123,45 @@ void game_update(){
                 window = SCENE_MENU;
             }
         }
+        else if( window == SCENE_ITEM){
+            if(next==SCENE_STORE)
+            {
+                game_scene5_init();
+                judge_next_window = false;
+                window = SCENE_STORE;
+            }else if(next==SCENE_MENU)
+            {
+                menu_init();
+                judge_next_window = false;
+                window = SCENE_MENU;
+            }
+        }
+        else if( window == SCENE_GAME){
+            if(next==SCENE_PAUSE)
+            {
+                game_scene7_init();
+                judge_next_window = false;
+                window = SCENE_PAUSE;
+            }
+        }
+        else if( window == SCENE_PAUSE){
+            if(next==SCENE_MENU)
+            {
+                menu_init();
+                judge_next_window = false;
+                window = SCENE_MENU;
+            }else if(next==SCENE_STORE)
+            {
+                game_scene5_init();
+                judge_next_window = false;
+                window = SCENE_STORE;
+            }else if(next==SCENE_HOWTOPLAY)
+            {
+                game_scene4_init();
+                judge_next_window = false;
+                window = SCENE_HOWTOPLAY;
+            }
+        }
     }
     if( window == SCENE_GAME ){
         charater_update();
@@ -151,10 +178,11 @@ int process_event(){
         charater_process(event);
     }else if( window == SCENE_ABOUT || window == SCENE_HOWTOPLAY){
         about_process(event);
-    }else if( window == SCENE_STORE){
+    }else if( window == SCENE_STORE||window == SCENE_ITEM){
         store_process(event);
+    }else if( window == SCENE_PAUSE){
+        pause_process(event);
     }
-
     // Shutdown our program
     if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         return GAME_TERMINATE;
@@ -177,6 +205,8 @@ void game_draw(){
         game_scene5_draw();
     }else if( window == 6 ){
         game_scene6_draw();
+    }else if( window == 7 ){
+        game_scene7_draw();
     }
     al_flip_display();
 }
@@ -197,5 +227,10 @@ void game_destroy() {
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
     game_scene2_destroy();
+    game_scene3_destroy();
+    game_scene4_destroy();
+    game_scene5_destroy();
+    game_scene6_destroy();
+    game_scene7_destroy();
     free(mouse_state);
 }

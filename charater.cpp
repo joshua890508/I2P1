@@ -20,7 +20,7 @@ void character_init(){
     // load character images
     for(int i = 1 ; i <= 2 ; i++){
         char temp[50];
-        sprintf( temp, "./image/char_move%d.jpg", i );
+        sprintf( temp, "./image/char_move%d.png", i );
         chara.img_move[i-1] = al_load_bitmap(temp);
     }
     for(int i = 1 ; i <= 2 ; i++){
@@ -48,6 +48,12 @@ void character_init(){
 
 }
 void charater_process(ALLEGRO_EVENT event){
+    if( event.type == ALLEGRO_EVENT_KEY_UP )
+        if( event.keyboard.keycode == ALLEGRO_KEY_P )
+        {
+            judge_next_window = true;
+            next = SCENE_PAUSE;
+        }
     // process the animation
     if( event.type == ALLEGRO_EVENT_TIMER ){
         if( event.timer.source == fps ){

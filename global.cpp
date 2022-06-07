@@ -11,3 +11,5 @@ bool key_state[ALLEGRO_KEY_MAX] = {false};
 bool judge_next_window = false;
 bool* mouse_state;// Mouse position.
 int next = 0;
+
+
