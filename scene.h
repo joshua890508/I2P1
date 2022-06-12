@@ -10,7 +10,7 @@ void game_scene2_init();
 void game_scene2_draw();
 void game_scene2_destroy();
 
-void about_process(ALLEGRO_EVENT event);
+//void about_process(ALLEGRO_EVENT event);
 void game_scene3_init();
 void game_scene3_draw();
 void game_scene3_destroy();
@@ -19,7 +19,7 @@ void game_scene4_init();
 void game_scene4_draw();
 void game_scene4_destroy();
 
-void store_process(ALLEGRO_EVENT event);
+//void store_process(ALLEGRO_EVENT event);
 void game_scene5_init();
 void game_scene5_draw();
 void game_scene5_destroy();
@@ -28,7 +28,7 @@ void game_scene6_init();
 void game_scene6_draw();
 void game_scene6_destroy();
 
-void pause_process(ALLEGRO_EVENT event);
+//void pause_process(ALLEGRO_EVENT event);
 void game_scene7_init();
 void game_scene7_draw();
 void game_scene7_destroy();

@@ -4,6 +4,10 @@ int mouse_x, mouse_y;
 ALLEGRO_FONT *font = NULL;
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_BITMAP *ABOUT = NULL;
+ALLEGRO_SAMPLE*song=NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instance;
+ALLEGRO_SAMPLE*song2=NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instance2;
 
 bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
 	if (px < w && py > y) {
@@ -31,6 +35,7 @@ void menu_process(ALLEGRO_EVENT event){
         }
     }
 }
+/*
 void about_process(ALLEGRO_EVENT event){
     if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
             mouse_state[event.mouse.button] = true;
@@ -76,7 +81,7 @@ void pause_process(ALLEGRO_EVENT event){
         }
     }
 }
-
+*/
 
 void on_mouse_down(int btn, int x, int y) {
 	if (btn == 1) {
@@ -141,7 +146,20 @@ void on_mouse_down(int btn, int x, int y) {
 
 
 void menu_init(){
+    // Load sound
     background = al_load_bitmap("./image/Menu (2).jpg");
+    song = al_load_sample("./sound/BGM.wav");
+    al_reserve_samples(20);
+    sample_instance = al_create_sample_instance(song);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance, 1) ;
+    al_play_sample_instance(sample_instance);
+    al_start_timer(fps);
+    // initialize the menu before entering the loop
 }
 void menu_draw(){
     al_draw_bitmap(background, 0, 0, 0);
@@ -151,7 +169,22 @@ void menu_destroy(){
 }
 
 void game_scene2_init(){
+    al_stop_sample_instance(sample_instance);
     character_init();
+     // Load sound
+    background = al_load_bitmap("./image/Menu (2).jpg");
+    song2 = al_load_sample("./sound/01_BGM.wav");
+    al_reserve_samples(20);
+    sample_instance2 = al_create_sample_instance(song2);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance2, ALLEGRO_PLAYMODE_ONCE);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance2, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance2, 1) ;
+    al_play_sample_instance(sample_instance2);
+    //al_start_timer(fps);
+    // initialize the menu before entering the loop
 }
 void game_scene2_draw(){
     background = al_load_bitmap("./image/Game_backgound.jpg");
@@ -204,6 +237,7 @@ void game_scene6_destroy(){
 }
 
 void game_scene7_init(){
+    al_stop_sample_instance(sample_instance2);
     ABOUT = al_load_bitmap("./image/Pause.jpg");
 }
 void game_scene7_draw(){

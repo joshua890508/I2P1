@@ -6,9 +6,8 @@ int window = SCENE_MENU;
 const char *title = "LONG LONG FRIENDS";
 
 // ALLEGRO Variables
-ALLEGRO_DISPLAY* display = NULL;
-ALLEGRO_SAMPLE *song=NULL;
-ALLEGRO_SAMPLE_INSTANCE *sample_instance;
+ALLEGRO_DISPLAY*display = NULL;
+
 
 int Game_establish() {
     int msg = 0;
@@ -62,19 +61,6 @@ void game_init() {
 }
 
 void game_begin() {
-    // Load sound
-    song = al_load_sample("./sound/BGM.wav");
-    al_reserve_samples(20);
-    sample_instance = al_create_sample_instance(song);
-    // Loop the song until the display closes
-    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
-    al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
-    // set the volume of instance
-    al_set_sample_instance_gain(sample_instance, 1) ;
-    al_play_sample_instance(sample_instance);
-    al_start_timer(fps);
-    // initialize the menu before entering the loop
     menu_init();
 }
 void game_update(){
@@ -172,17 +158,12 @@ int process_event(){
     ALLEGRO_EVENT event;
     al_wait_for_event(event_queue, &event);
     // process the event of other component
-    if( window == SCENE_MENU ){
-        menu_process(event);
-    }else if( window == SCENE_GAME ){
+    if( window == SCENE_GAME ){
         charater_process(event);
-    }else if( window == SCENE_ABOUT || window == SCENE_HOWTOPLAY){
-        about_process(event);
-    }else if( window == SCENE_STORE||window == SCENE_ITEM){
-        store_process(event);
-    }else if( window == SCENE_PAUSE){
-        pause_process(event);
+    }else {
+        menu_process(event);
     }
+
     // Shutdown our program
     if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         return GAME_TERMINATE;
