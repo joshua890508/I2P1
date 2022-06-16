@@ -3,7 +3,6 @@
 int mouse_x, mouse_y;
 ALLEGRO_FONT *font = NULL;
 ALLEGRO_BITMAP *background = NULL;
-ALLEGRO_BITMAP *ABOUT = NULL;
 ALLEGRO_SAMPLE*song=NULL;
 ALLEGRO_SAMPLE_INSTANCE*sample_instance;
 ALLEGRO_SAMPLE*song2=NULL;
@@ -146,6 +145,7 @@ void on_mouse_down(int btn, int x, int y) {
 
 
 void menu_init(){
+
     // Load sound
     background = al_load_bitmap("./image/Menu (2).jpg");
     song = al_load_sample("./sound/BGM.wav");
@@ -171,6 +171,7 @@ void menu_destroy(){
 void game_scene2_init(){
     al_stop_sample_instance(sample_instance);
     character_init();
+    nose_init();
      // Load sound
     background = al_load_bitmap("./image/Menu (2).jpg");
     song2 = al_load_sample("./sound/01_BGM.wav");
@@ -190,6 +191,7 @@ void game_scene2_draw(){
     background = al_load_bitmap("./image/Game_backgound.jpg");
     al_draw_bitmap(background, 0, 0, 0);
     character_draw();
+    nose_draw();
 }
 void game_scene2_destroy(){
     al_destroy_bitmap(background);
@@ -197,52 +199,52 @@ void game_scene2_destroy(){
 }
 
 void game_scene3_init(){
-    ABOUT = al_load_bitmap("./image/about.jpg");
+    background = al_load_bitmap("./image/about.jpg");
 }
 void game_scene3_draw(){
-    al_draw_bitmap(ABOUT, 0, 0, 0);
+    al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene3_destroy(){
-    al_destroy_bitmap(ABOUT);
+    al_destroy_bitmap(background);
 }
 
 void game_scene4_init(){
-    ABOUT = al_load_bitmap("./image/Howtoplay.jpg");
+    background = al_load_bitmap("./image/Howtoplay.jpg");
 }
 void game_scene4_draw(){
-    al_draw_bitmap(ABOUT, 0, 0, 0);
+    al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene4_destroy(){
-    al_destroy_bitmap(ABOUT);
+    al_destroy_bitmap(background);
 }
 
 void game_scene5_init(){
-    ABOUT = al_load_bitmap("./image/Store (1).jpg");
+    background = al_load_bitmap("./image/Store (1).jpg");
 }
 void game_scene5_draw(){
-    al_draw_bitmap(ABOUT, 0, 0, 0);
+    al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene5_destroy(){
-    al_destroy_bitmap(ABOUT);
+    al_destroy_bitmap(background);
 }
 
 void game_scene6_init(){
-    ABOUT = al_load_bitmap("./image/ITEM.jpg");
+    background = al_load_bitmap("./image/ITEM.jpg");
 }
 void game_scene6_draw(){
-    al_draw_bitmap(ABOUT, 0, 0, 0);
+    al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene6_destroy(){
-    al_destroy_bitmap(ABOUT);
+    al_destroy_bitmap(background);
 }
 
 void game_scene7_init(){
     al_stop_sample_instance(sample_instance2);
-    ABOUT = al_load_bitmap("./image/Pause.jpg");
+    background = al_load_bitmap("./image/Pause.jpg");
 }
 void game_scene7_draw(){
-    al_draw_bitmap(ABOUT, 0, 0, 0);
+    al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene7_destroy(){
-    al_destroy_bitmap(ABOUT);
+    al_destroy_bitmap(background);
 }

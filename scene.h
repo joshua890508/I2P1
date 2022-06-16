@@ -1,5 +1,6 @@
 #include "global.h"
 #include "charater.h"
+#include "nose.h"
 
 void menu_process(ALLEGRO_EVENT event);
 void menu_init();

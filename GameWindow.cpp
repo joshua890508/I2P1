@@ -151,6 +151,7 @@ void game_update(){
     }
     if( window == SCENE_GAME ){
         charater_update();
+        nose_update();
     }
 }
 int process_event(){

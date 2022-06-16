@@ -44,12 +44,10 @@
 		<Unit filename="global.cpp" />
 		<Unit filename="global.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="nose.cpp" />
+		<Unit filename="nose.h" />
 		<Unit filename="scene.cpp" />
 		<Unit filename="scene.h" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

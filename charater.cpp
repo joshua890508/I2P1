@@ -2,38 +2,27 @@
 
 bool A,D;
 
-typedef struct character
-{
-    int x,y; // the position of image
-    int width, height; // the width and height of image
-    bool dir; // left: false, right: true
-    ALLEGRO_BITMAP *img_move;
-}Character;
-Character chara;
-
 void character_init(){
     // load character images
     chara.img_move = al_load_bitmap("./image/char_move1.png");
     // initial the geometric information of character
-    chara.width = al_get_bitmap_width(chara.img_move);
-    chara.height = al_get_bitmap_height(chara.img_move);
-    chara.x = 190;
-    chara.y = 550;
+    chara.w = al_get_bitmap_width(chara.img_move);
+    chara.h = al_get_bitmap_height(chara.img_move);
+    chara.x = WIDTH/2-chara.w/2;
+    chara.y = 720-chara.h/2;
     chara.dir = false;
 }
 
 void charater_process(ALLEGRO_EVENT event){
-    if( event.type == ALLEGRO_EVENT_KEY_UP )
+    if( event.type == ALLEGRO_EVENT_KEY_DOWN )
         if( event.keyboard.keycode == ALLEGRO_KEY_P )
         {
             judge_next_window = true;
             next = SCENE_PAUSE;
         }
-    if( event.type == ALLEGRO_EVENT_KEY_UP )
-        if( event.keyboard.keycode == ALLEGRO_KEY_A )
-            A = true;
-        else if( event.keyboard.keycode == ALLEGRO_KEY_D )
-            D = true;
+    if( event.type == ALLEGRO_EVENT_KEY_DOWN )
+        if( event.keyboard.keycode == ALLEGRO_KEY_A )A = true;
+        else if( event.keyboard.keycode == ALLEGRO_KEY_D )D = true;
 }
 void charater_update(){
     // use the idea of finite state machine to deal with different state
