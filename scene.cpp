@@ -143,7 +143,6 @@ void on_mouse_down(int btn, int x, int y) {
 	}
 }
 
-
 void menu_init(){
 
     // Load sound
@@ -184,14 +183,18 @@ void game_scene2_init(){
     // set the volume of instance
     al_set_sample_instance_gain(sample_instance2, 1) ;
     al_play_sample_instance(sample_instance2);
-    //al_start_timer(fps);
     // initialize the menu before entering the loop
+
 }
 void game_scene2_draw(){
     background = al_load_bitmap("./image/Game_backgound.jpg");
     al_draw_bitmap(background, 0, 0, 0);
     character_draw();
     nose_draw();
+    ///char text[20];
+    ///sprintf(text, "%d", score);
+    ///font=al_load_ttf_font("./font/pirulen.ttf",30,0);
+    ///al_draw_text(font,al_map_rgb(0,0,0),365,47,0,text);
 }
 void game_scene2_destroy(){
     al_destroy_bitmap(background);

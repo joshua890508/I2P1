@@ -15,8 +15,9 @@ ALLEGRO_TIMER *fps = NULL;
 bool judge_next_window = false;
 bool* mouse_state;// Mouse position.
 int next = 0;
+int score = 0;
 
 MovableObject chara;
-MovableObject nose;
+MovableObject nose[50];
 
 

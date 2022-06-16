@@ -1,60 +1,52 @@
 #include "nose.h"
 
-int score=0;
-
 void nose_init(){
+    srand( time(NULL) );
+    int min=0,max=2;
     // load character images
-    nose.img_move = al_load_bitmap("./image/bullet.png");
-    // initial the geometric information of character
-    nose.w = al_get_bitmap_width(nose.img_move);
-    nose.h = al_get_bitmap_height(nose.img_move);
-    nose.x = LEFT-nose.w/2;
-    nose.y = 100-nose.h/2;
-    nose.v = 4;
-    nose.dir = false;
-    nose.hidden = false;
-}
-
-void nose_process(ALLEGRO_EVENT event){
-    /*if( event.type == ALLEGRO_EVENT_TIMER ){
-        if( event.timer.source == fps ){
-            nose.y+=nose.v;
-        }
-    }*/
+    for(int i=0;i<50;i++)
+    {
+        nose[i].img_move = al_load_bitmap("./image/bullet.png");
+        // initial the geometric information of character
+        nose[i].w = al_get_bitmap_width(nose[i].img_move);
+        nose[i].h = al_get_bitmap_height(nose[i].img_move);
+        nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
+        nose[i].y = 100 - nose[i].h/2;
+        nose[i].v = 3.0;
+        nose[i].hidden = true;
+    }
+    nose[0].hidden = false;//first nose
 }
 
 void nose_update(){
-    /*font=al_load_ttf_font("./font/pirulen.ttf",50,0);
-    al_draw_text(font,al_map_rgb(0,0,0),width/2,height/2,"%d",word);*/
-    nose.y+=nose.v;
-    if (!nose.hidden &&
-        nose.y>=chara.y+nose.h &&
-        nose.y<=chara.y+(chara.h+nose.h)/4)//sensor
+    for(int i=0;i<50;i++)
     {
-        if(chara.x+chara.w/2==nose.x+nose.w/2)//same x position
+        if (!nose[i].hidden)
         {
-            nose.hidden = true;
-            score+=5;
+            nose[i].y+=nose[i].v;
+            if (nose[i].y>=WIDTH/2 &&
+                nose[i].y<=WIDTH/2+(chara.h+nose[i].h)/4)
+                nose[i+1].hidden=false;
+            else if (nose[i].y>=chara.y+nose[i].h &&
+                nose[i].y<=chara.y+(chara.h+nose[i].h)/4)//same y position
+            {
+                if(chara.x+chara.w/2==nose[i].x + nose[i].w/2)//same x position
+                {
+                    nose[i].hidden = true;
+                    score+=5;
+                }
+            }
         }
     }
-    /*for (int i = 0; i < 3; i++){
-        for (int j = 0; j < MAX_BULLET-2; j++){
-            if (nose[i][j].hidden)continue;
-            nose[i][j].x += nose[i][j].vx;
-            nose[i][j].y += nose[i][j].vy;
-            if (nose[i][j].y >= HEIGHT)
-                nose[i][j].hidden = true;
-        }
-    }*/
 }
 
 void nose_draw(){
-    /*for (int i = 0; i < 3; i++)
-        for(int j = 0;j < 100;j++)*/
-            if (!nose.hidden)
-                al_draw_bitmap(nose.img_move, nose.x, nose.y, 0);
+    for(int i=0;i<50;i++)
+        if (!nose[i].hidden)
+            al_draw_bitmap(nose[i].img_move, nose[i].x, nose[i].y, 0);
+
 }
 
 void nose_destory(){
-    al_destroy_bitmap(nose.img_move);
+    for(int i=0;i<50;i++)al_destroy_bitmap(nose[i].img_move);
 }

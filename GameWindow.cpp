@@ -58,11 +58,13 @@ void game_init() {
     // initialize the icon on the display
     ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.jpg");
     al_set_display_icon(display, icon);
+
 }
 
 void game_begin() {
     menu_init();
 }
+
 void game_update(){
     if( judge_next_window ){
         if( window == SCENE_MENU ){
@@ -149,7 +151,7 @@ void game_update(){
             }
         }
     }
-    if( window == SCENE_GAME ){
+    else if( window == SCENE_GAME ){
         charater_update();
         nose_update();
     }
