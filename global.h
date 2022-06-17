@@ -23,9 +23,9 @@ enum {
 
 typedef struct
 {
-    float x,y; // the position of image
-    float w,h; // the width and height of image
-    float v;// velocity
+    int x,y; // the position of image
+    int w,h; // the width and height of image
+    int v;// velocity
 	bool hidden;// Should we draw this object on the screen.
     bool dir; // left/down: false, right/up: true
     int type;//nose or coin
@@ -35,12 +35,12 @@ extern MovableObject chara;
 extern MovableObject nose[50];
 // note that you can't assign initial value here!
 extern const float FPS;
-extern const float WIDTH;
-extern const float HEIGHT;
+extern const int WIDTH;
+extern const int HEIGHT;
 
-extern const float LEFT;
-extern const float MIDDLE;
-extern const float RIGHT;
+extern const int LEFT;
+extern const int MIDDLE;
+extern const int RIGHT;
 extern bool judge_next_window;
 extern int next;
 extern int score;
@@ -58,7 +58,15 @@ extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;
 extern bool* mouse_state;
 extern bool pause;
+
+extern int nowchar;
 extern bool longneck;
 extern bool penguin;
 extern bool dog;
+
+extern bool nowitem[4];
+extern bool hat;
+extern bool butterfly;
+extern bool cry;
+extern bool thunder;
 #endif

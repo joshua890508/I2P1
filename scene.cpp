@@ -121,13 +121,20 @@ void on_mouse_down(int btn, int x, int y) {
                     coin-=50;
                     penguin=true;
                 }
-            }
-            else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
+            }else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
                 if(coin>=50 && !dog)
                 {
                     coin-=50;
                     dog=true;
                 }
+            }else if (pnt_in_rect(x, y, 110, 360, 230, 460)){
+                nowchar=1;
+            }else if (pnt_in_rect(x, y, 245, 360, 364, 460)){
+                if(longneck)nowchar=2;
+            }else if (pnt_in_rect(x, y, 380, 360, 500, 460)){
+                if(penguin)nowchar=3;
+            }else if (pnt_in_rect(x, y, 105, 522, 228, 630)){
+                if(dog)nowchar=4;
             }
         }
         else if (window==SCENE_ITEM)
@@ -138,6 +145,38 @@ void on_mouse_down(int btn, int x, int y) {
             }else if (pnt_in_rect(x, y, 120, 280, 265, 330)){
                 judge_next_window = true;
                 next=SCENE_STORE;
+            }else if (pnt_in_rect(x, y, 130, 470, 210, 505)){
+                if(coin>=30 && !hat)
+                {
+                    coin-=30;
+                    hat=true;
+                }
+            }else if (pnt_in_rect(x, y, 265, 470, 340, 500)){
+                if(coin>=30 && !butterfly)
+                {
+                    coin-=30;
+                    butterfly=true;
+                }
+            }else if (pnt_in_rect(x, y, 400, 470, 480, 500)){
+                if(coin>=30 && !cry)
+                {
+                    coin-=30;
+                    cry=true;
+                }
+            }else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
+                if(coin>=30 && !thunder)
+                {
+                    coin-=30;
+                    thunder=true;
+                }
+            }else if (pnt_in_rect(x, y, 110, 360, 230, 460)){
+                if(hat)nowitem[0] = !nowitem[0];
+            }else if (pnt_in_rect(x, y, 245, 360, 364, 460)){
+                if(butterfly)nowitem[1] = !nowitem[1];
+            }else if (pnt_in_rect(x, y, 380, 360, 500, 460)){
+                if(cry)nowitem[2] = !nowitem[2];
+            }else if (pnt_in_rect(x, y, 105, 522, 228, 630)){
+                if(thunder)nowitem[3] = !nowitem[3];
             }
         }
         else if (window==SCENE_PAUSE)
@@ -225,6 +264,8 @@ void game_scene6_init(){
 }
 void game_scene6_draw(){
     al_draw_bitmap(background, 0, 0, 0);
+    sprintf(c, "%d", coin);
+    al_draw_text(font,al_map_rgb(0,0,0),390,200,0,c);
 }
 void game_scene6_destroy(){
     al_destroy_bitmap(background);
