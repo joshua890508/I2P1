@@ -18,7 +18,7 @@ enum {
     SCENE_ITEM = 6,
     SCENE_PAUSE = 7,
     SCENE_WIN = 8,
-    SCENE_GAMEOVER = 9,
+    SCENE_LOSE = 9,
 };
 
 typedef struct
@@ -58,4 +58,7 @@ extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;
 extern bool* mouse_state;
 extern bool pause;
+extern bool longneck;
+extern bool penguin;
+extern bool dog;
 #endif

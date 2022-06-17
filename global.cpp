@@ -21,11 +21,15 @@ bool judge_next_window = false;
 bool* mouse_state;// Mouse position.
 bool pause=false;
 
-int next = 0;
-int score = 0;
+int next=0;
+int score;
 char s[20000];
-int coin = 0;
+int coin=0;
 char c[20000];
+
+bool longneck = false;
+bool penguin = false;
+bool dog = false;
 
 MovableObject chara;
 MovableObject nose[50];

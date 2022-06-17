@@ -34,6 +34,14 @@ void game_scene7_init();
 void game_scene7_draw();
 void game_scene7_destroy();
 
+void game_scene8_init();
+void game_scene8_draw();
+void game_scene8_destroy();
+
+void game_scene9_init();
+void game_scene9_draw();
+void game_scene9_destroy();
+
 void on_mouse_down(int btn, int x, int y);
 bool pnt_in_rect(int px, int py, int x, int y, int w, int h);
 

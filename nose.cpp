@@ -1,9 +1,9 @@
 #include "nose.h"
 
 void nose_init(){
+    score=0;
     srand( time(NULL) );
-    // load character images
-    for(int i=0;i<50;i++)
+    for(int i=0;i<30;i++)
     {
         int min=0,max=3;
         nose[i].type=rand() % (max - min + 1) + min;
@@ -15,14 +15,15 @@ void nose_init(){
         min=0,max=2;
         nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
         nose[i].y = 100 - nose[i].h/2;
-        nose[i].v = 3.0;
+        nose[i].v = 6;
         nose[i].hidden = true;
     }
     nose[0].hidden = false;//first nose
 }
 
 void nose_update(){
-    for(int i=0;i<50;i++)
+    int i;
+    for(i=0;i<30;i++)
     {
         if (!nose[i].hidden)
         {
@@ -32,11 +33,17 @@ void nose_update(){
             else if (nose[i].y>=chara.y+nose[i].h &&
                 nose[i].y<=chara.y+(chara.h+nose[i].h)/4)//same y position
             {
-                if(chara.x+chara.w/2==nose[i].x + nose[i].w/2)//same x position
+                if(chara.x+chara.w/2==nose[i].x+nose[i].w/2)//same x position
                 {
                     nose[i].hidden = true;
                     score+=5;
                     if(nose[i].type==0)coin+=3;
+                }
+                if(i==29)
+                {
+                    judge_next_window=true;
+                    if(score>=135)next = SCENE_WIN;
+                    else next = SCENE_LOSE;
                 }
             }
         }
@@ -46,7 +53,7 @@ void nose_update(){
 }
 
 void nose_draw(){
-    for(int i=0;i<50;i++)
+    for(int i=0;i<30;i++)
         if (!nose[i].hidden)
             al_draw_bitmap(nose[i].img_move, nose[i].x, nose[i].y, 0);
 
@@ -55,5 +62,5 @@ void nose_draw(){
 }
 
 void nose_destory(){
-    for(int i=0;i<50;i++)al_destroy_bitmap(nose[i].img_move);
+    for(int i=0;i<30;i++)al_destroy_bitmap(nose[i].img_move);
 }

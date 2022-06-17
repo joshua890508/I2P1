@@ -12,7 +12,6 @@ void character_init(){
     chara.y = 720 - chara.h/2;
     chara.dir = false;
 }
-
 void charater_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_DOWN )
         if( event.keyboard.keycode == ALLEGRO_KEY_P )

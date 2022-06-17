@@ -45,7 +45,7 @@ void game_init() {
     al_register_event_source(event_queue, al_get_display_event_source( display ));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_mouse_event_source());
-    fps  = al_create_timer( 1.0 / FPS );
+    fps  = al_create_timer( 2.0 / FPS );
     al_register_event_source(event_queue, al_get_timer_event_source( fps )) ;
     // mouse
     const unsigned m_buttons = al_get_mouse_num_buttons();
@@ -153,6 +153,18 @@ void game_update(){
                 judge_next_window = false;
                 window = SCENE_PAUSE;
             }
+            else if(next==SCENE_WIN)
+            {
+                game_scene8_init();
+                judge_next_window = false;
+                window = SCENE_WIN;
+            }
+            else if(next==SCENE_LOSE)
+            {
+                game_scene9_init();
+                judge_next_window = false;
+                window = SCENE_LOSE;
+            }
         }
         else if( window == SCENE_PAUSE){
             if(next==SCENE_MENU)
@@ -170,6 +182,14 @@ void game_update(){
                 game_scene4_init();
                 judge_next_window = false;
                 window = SCENE_HOWTOPLAY;
+            }
+        }
+        else if( window == SCENE_WIN || window == SCENE_LOSE){
+            if(next==SCENE_MENU)
+            {
+                menu_init();
+                judge_next_window = false;
+                window = SCENE_MENU;
             }
         }
     }
@@ -212,6 +232,10 @@ void game_draw(){
         game_scene6_draw();
     }else if( window == 7 ){
         game_scene7_draw();
+    }else if( window == 8 ){
+        game_scene8_draw();
+    }else if( window == 9 ){
+        game_scene9_draw();
     }
     al_flip_display();
 }
@@ -226,7 +250,6 @@ int game_run() {
     }
     return error;
 }
-
 void game_destroy() {
     // Make sure you destroy all things
     al_destroy_event_queue(event_queue);
@@ -240,5 +263,7 @@ void game_destroy() {
     game_scene5_destroy();
     game_scene6_destroy();
     game_scene7_destroy();
+    game_scene8_destroy();
+    game_scene9_destroy();
     free(mouse_state);
 }

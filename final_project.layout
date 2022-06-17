@@ -2,37 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="GameWindow.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2473" topLine="45" />
-		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="90" />
-			<Collapse line="180" />
-			<Collapse line="199" />
-			<Collapse line="217" />
-			<Collapse line="229" />
-		</Folding>
-	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="25" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="global.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="655" topLine="9" />
-		</Cursor>
-	</File>
-	<File name="nose.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1784" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="global.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="833" topLine="20" />
 		</Cursor>
 	</File>
 	<File name="charater.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -40,29 +12,18 @@
 			<Cursor1 position="166" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="scene.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="scene.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5389" topLine="69" />
+			<Cursor1 position="317" topLine="18" />
 		</Cursor>
 		<Folding>
 			<Collapse line="7" />
-			<Collapse line="33" />
-			<Collapse line="84" />
-			<Collapse line="100" />
-			<Collapse line="107" />
-			<Collapse line="117" />
-		</Folding>
-	</File>
-	<File name="charater.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="570" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="4" />
-			<Collapse line="27" />
-			<Collapse line="41" />
-			<Collapse line="54" />
-			<Collapse line="61" />
+			<Collapse line="15" />
+			<Collapse line="30" />
+			<Collapse line="81" />
+			<Collapse line="97" />
+			<Collapse line="133" />
+			<Collapse line="143" />
 		</Folding>
 	</File>
 	<File name="GameWindow.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -70,14 +31,56 @@
 			<Cursor1 position="81" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="nose.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1460" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="global.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1641" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="scene.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="949" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="GameWindow.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="115" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="22" />
+			<Collapse line="59" />
+			<Collapse line="89" />
+			<Collapse line="200" />
+			<Collapse line="219" />
+			<Collapse line="241" />
+			<Collapse line="252" />
+		</Folding>
+	</File>
 	<File name="nose.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="23" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="scene.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="global.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="144" topLine="0" />
+			<Cursor1 position="723" topLine="0" />
 		</Cursor>
+	</File>
+	<File name="charater.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="409" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="14" />
+			<Collapse line="40" />
+			<Collapse line="53" />
+			<Collapse line="60" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>
