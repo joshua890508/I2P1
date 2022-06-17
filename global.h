@@ -28,24 +28,34 @@ typedef struct
     float v;// velocity
 	bool hidden;// Should we draw this object on the screen.
     bool dir; // left/down: false, right/up: true
+    int type;//nose or coin
     ALLEGRO_BITMAP *img_move;
 }MovableObject;
 extern MovableObject chara;
 extern MovableObject nose[50];
 // note that you can't assign initial value here!
 extern const float FPS;
-extern const int WIDTH;
-extern const int HEIGHT;
+extern const float WIDTH;
+extern const float HEIGHT;
 
-extern const int LEFT;
-extern const int MIDDLE;
-extern const int RIGHT;
-//extern bool key_state[ALLEGRO_KEY_MAX];
+extern const float LEFT;
+extern const float MIDDLE;
+extern const float RIGHT;
 extern bool judge_next_window;
 extern int next;
 extern int score;
+extern char s[20000];
+extern int coin;
+extern char c[20000];
 extern int window;
 extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
+extern ALLEGRO_SAMPLE*song;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instance;
+extern ALLEGRO_SAMPLE*song2;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instance2;
+extern ALLEGRO_DISPLAY*display;
+extern ALLEGRO_FONT *font;
 extern bool* mouse_state;
+extern bool pause;
 #endif

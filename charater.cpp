@@ -8,8 +8,8 @@ void character_init(){
     // initial the geometric information of character
     chara.w = al_get_bitmap_width(chara.img_move);
     chara.h = al_get_bitmap_height(chara.img_move);
-    chara.x = WIDTH/2-chara.w/2;
-    chara.y = 720-chara.h/2;
+    chara.x = WIDTH/2 - chara.w/2;
+    chara.y = 720 - chara.h/2;
     chara.dir = false;
 }
 
@@ -20,9 +20,24 @@ void charater_process(ALLEGRO_EVENT event){
             judge_next_window = true;
             next = SCENE_PAUSE;
         }
-    if( event.type == ALLEGRO_EVENT_KEY_DOWN )
-        if( event.keyboard.keycode == ALLEGRO_KEY_A )A = true;
-        else if( event.keyboard.keycode == ALLEGRO_KEY_D )D = true;
+        else if( event.keyboard.keycode == ALLEGRO_KEY_A )
+            A = true;
+        else if( event.keyboard.keycode == ALLEGRO_KEY_D )
+            D = true;
+        else if( event.keyboard.keycode == ALLEGRO_KEY_J )
+        {
+            pause=!pause;
+            if(pause)
+            {
+                al_stop_timer(fps);
+                al_stop_sample_instance(sample_instance2);
+            }
+            else
+            {
+                al_start_timer(fps);
+                al_play_sample_instance(sample_instance2);
+            }
+        }
 }
 void charater_update(){
     // use the idea of finite state machine to deal with different state
@@ -30,7 +45,8 @@ void charater_update(){
         chara.dir = false;
         if(chara.x>35)chara.x -= 180;
         A = false;
-    }else if( D ){
+    }
+    else if( D ){
         chara.dir = true;
         if(chara.x<335)chara.x += 180;
         D = false;

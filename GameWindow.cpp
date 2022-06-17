@@ -5,10 +5,6 @@ int window = SCENE_MENU;
 
 const char *title = "LONG LONG FRIENDS";
 
-// ALLEGRO Variables
-ALLEGRO_DISPLAY*display = NULL;
-
-
 int Game_establish() {
     int msg = 0;
 
@@ -62,6 +58,32 @@ void game_init() {
 }
 
 void game_begin() {
+    // Load sound
+    song = al_load_sample("./sound/BGM.wav");
+    al_reserve_samples(20);
+    sample_instance = al_create_sample_instance(song);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance, 1) ;
+
+    //Load font
+    font=al_load_ttf_font("./font/pirulen.ttf",30,0);
+
+    // Load sound2
+    song2 = al_load_sample("./sound/01_BGM.wav");
+    al_reserve_samples(20);
+    sample_instance2 = al_create_sample_instance(song2);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance2, ALLEGRO_PLAYMODE_ONCE);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance2, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance2, 1) ;
+    al_start_timer(fps);
+    // initialize the menu before entering the loop
     menu_init();
 }
 
@@ -161,11 +183,10 @@ int process_event(){
     ALLEGRO_EVENT event;
     al_wait_for_event(event_queue, &event);
     // process the event of other component
-    if( window == SCENE_GAME ){
+    if( window == SCENE_GAME )
         charater_process(event);
-    }else {
+    else
         menu_process(event);
-    }
 
     // Shutdown our program
     if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -210,6 +231,9 @@ void game_destroy() {
     // Make sure you destroy all things
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
+    al_destroy_sample_instance(sample_instance);
+    al_destroy_sample_instance(sample_instance2);
+    menu_destroy();
     game_scene2_destroy();
     game_scene3_destroy();
     game_scene4_destroy();

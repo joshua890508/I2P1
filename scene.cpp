@@ -1,12 +1,9 @@
 #include "scene.h"
 
 int mouse_x, mouse_y;
-ALLEGRO_FONT *font = NULL;
+
 ALLEGRO_BITMAP *background = NULL;
-ALLEGRO_SAMPLE*song=NULL;
-ALLEGRO_SAMPLE_INSTANCE*sample_instance;
-ALLEGRO_SAMPLE*song2=NULL;
-ALLEGRO_SAMPLE_INSTANCE*sample_instance2;
+
 
 bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
 	if (px < w && py > y) {
@@ -144,21 +141,8 @@ void on_mouse_down(int btn, int x, int y) {
 }
 
 void menu_init(){
-
-    // Load sound
     background = al_load_bitmap("./image/Menu (2).jpg");
-    song = al_load_sample("./sound/BGM.wav");
-    al_reserve_samples(20);
-    sample_instance = al_create_sample_instance(song);
-    // Loop the song until the display closes
-    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
-    al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
-    // set the volume of instance
-    al_set_sample_instance_gain(sample_instance, 1) ;
     al_play_sample_instance(sample_instance);
-    al_start_timer(fps);
-    // initialize the menu before entering the loop
 }
 void menu_draw(){
     al_draw_bitmap(background, 0, 0, 0);
@@ -169,21 +153,11 @@ void menu_destroy(){
 
 void game_scene2_init(){
     al_stop_sample_instance(sample_instance);
+    al_play_sample_instance(sample_instance2);
+
     character_init();
     nose_init();
-     // Load sound
     background = al_load_bitmap("./image/Menu (2).jpg");
-    song2 = al_load_sample("./sound/01_BGM.wav");
-    al_reserve_samples(20);
-    sample_instance2 = al_create_sample_instance(song2);
-    // Loop the song until the display closes
-    al_set_sample_instance_playmode(sample_instance2, ALLEGRO_PLAYMODE_ONCE);
-    al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(sample_instance2, al_get_default_mixer());
-    // set the volume of instance
-    al_set_sample_instance_gain(sample_instance2, 1) ;
-    al_play_sample_instance(sample_instance2);
-    // initialize the menu before entering the loop
 
 }
 void game_scene2_draw(){
@@ -191,14 +165,11 @@ void game_scene2_draw(){
     al_draw_bitmap(background, 0, 0, 0);
     character_draw();
     nose_draw();
-    ///char text[20];
-    ///sprintf(text, "%d", score);
-    ///font=al_load_ttf_font("./font/pirulen.ttf",30,0);
-    ///al_draw_text(font,al_map_rgb(0,0,0),365,47,0,text);
 }
 void game_scene2_destroy(){
     al_destroy_bitmap(background);
     character_destory();
+    nose_destory();
 }
 
 void game_scene3_init(){
