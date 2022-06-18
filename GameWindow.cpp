@@ -45,7 +45,7 @@ void game_init() {
     al_register_event_source(event_queue, al_get_display_event_source( display ));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_mouse_event_source());
-    fps  = al_create_timer( 2.0 / FPS );
+    fps  = al_create_timer( 2.5 / FPS );
     al_register_event_source(event_queue, al_get_timer_event_source( fps )) ;
     // mouse
     const unsigned m_buttons = al_get_mouse_num_buttons();
@@ -54,10 +54,11 @@ void game_init() {
     // initialize the icon on the display
     ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.jpg");
     al_set_display_icon(display, icon);
-
 }
 
 void game_begin() {
+    //Load font
+    font=al_load_ttf_font("./font/abg.ttf",35,0);
     // Load sound
     song = al_load_sample("./sound/BGM.wav");
     al_reserve_samples(20);
@@ -69,19 +70,28 @@ void game_begin() {
     // set the volume of instance
     al_set_sample_instance_gain(sample_instance, 1) ;
 
-    //Load font
-    font=al_load_ttf_font("./font/abg.ttf",35,0);
-
-    // Load sound2
-    song2 = al_load_sample("./sound/1-1.wav");
+    // Load sound1-1
+    song11 = al_load_sample("./sound/1-1.wav");
     al_reserve_samples(20);
-    sample_instance2 = al_create_sample_instance(song2);
+    sample_instance11 = al_create_sample_instance(song11);
     // Loop the song until the display closes
-    al_set_sample_instance_playmode(sample_instance2, ALLEGRO_PLAYMODE_ONCE);
+    al_set_sample_instance_playmode(sample_instance11, ALLEGRO_PLAYMODE_ONCE);
     al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(sample_instance2, al_get_default_mixer());
+    al_attach_sample_instance_to_mixer(sample_instance11, al_get_default_mixer());
     // set the volume of instance
-    al_set_sample_instance_gain(sample_instance2, 1) ;
+    al_set_sample_instance_gain(sample_instance11, 1) ;
+
+    // Load sound1-2
+    song12 = al_load_sample("./sound/1-2.wav");
+    al_reserve_samples(20);
+    sample_instance12 = al_create_sample_instance(song12);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance12, ALLEGRO_PLAYMODE_ONCE);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance12, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance12, 1) ;
+
     al_start_timer(fps);
     // initialize the menu before entering the loop
     menu_init();
@@ -153,17 +163,23 @@ void game_update(){
                 judge_next_window = false;
                 window = SCENE_PAUSE;
             }
-            else if(next==SCENE_WIN)
+            /*else if(next==SCENE_WIN)
             {
                 game_scene8_init();
                 judge_next_window = false;
                 window = SCENE_WIN;
-            }
+            }*/
             else if(next==SCENE_LOSE)
             {
                 game_scene9_init();
                 judge_next_window = false;
                 window = SCENE_LOSE;
+            }
+            else if(next==SCENE_LEVELUP)
+            {
+                game_scene10_init();
+                judge_next_window = false;
+                window = SCENE_LEVELUP;
             }
         }
         else if( window == SCENE_PAUSE){
@@ -195,6 +211,14 @@ void game_update(){
                 menu_init();
                 judge_next_window = false;
                 window = SCENE_MENU;
+            }
+        }
+        else if( window == SCENE_LEVELUP){
+            if(next==SCENE_GAME)
+            {
+                game_scene2_init();
+                judge_next_window = false;
+                window = 2;
             }
         }
     }
@@ -241,6 +265,8 @@ void game_draw(){
         game_scene8_draw();
     }else if( window == 9 ){
         game_scene9_draw();
+    }else if( window == 10 ){
+        game_scene10_draw();
     }
     al_flip_display();
 }
@@ -260,7 +286,8 @@ void game_destroy() {
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
     al_destroy_sample_instance(sample_instance);
-    al_destroy_sample_instance(sample_instance2);
+    al_destroy_sample_instance(sample_instance11);
+    al_destroy_sample_instance(sample_instance12);
     menu_destroy();
     game_scene2_destroy();
     game_scene3_destroy();
@@ -270,5 +297,6 @@ void game_destroy() {
     game_scene7_destroy();
     game_scene8_destroy();
     game_scene9_destroy();
+    game_scene10_destroy();
     free(mouse_state);
 }

@@ -76,7 +76,6 @@ void pause_process(ALLEGRO_EVENT event){
     }
 }
 */
-
 void on_mouse_down(int btn, int x, int y) {
 	if (btn == 1) {
         if (window==SCENE_MENU)
@@ -122,7 +121,8 @@ void on_mouse_down(int btn, int x, int y) {
                     coin-=50;
                     penguin=true;
                 }
-            }else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
+            }
+            else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
                 if(coin>=50 && !dog)
                 {
                     coin-=50;
@@ -200,6 +200,13 @@ void on_mouse_down(int btn, int x, int y) {
                 next=SCENE_GAME;
             }
         }
+        else if (window==SCENE_LEVELUP)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 600, 900)){
+                judge_next_window = true;
+                next=SCENE_GAME;
+            }
+        }
 	}
 }
 
@@ -216,7 +223,8 @@ void menu_destroy(){
 
 void game_scene2_init(){
     al_stop_sample_instance(sample_instance);
-    al_play_sample_instance(sample_instance2);
+    if(level==1)al_play_sample_instance(sample_instance11);
+    else if(level==2)al_play_sample_instance(sample_instance12);
 
     character_init();
     nose_init();
@@ -224,7 +232,7 @@ void game_scene2_init(){
 
 }
 void game_scene2_draw(){
-    background = al_load_bitmap("./image/Game_backgound.jpg");
+    background = al_load_bitmap("./image/Game_backgound.png");
     al_draw_bitmap(background, 0, 0, 0);
     character_draw();
     nose_draw();
@@ -303,7 +311,8 @@ void game_scene6_destroy(){
 }
 
 void game_scene7_init(){
-    al_stop_sample_instance(sample_instance2);
+    al_stop_sample_instance(sample_instance11);
+    al_stop_sample_instance(sample_instance12);
     background = al_load_bitmap("./image/Pause.png");
 }
 void game_scene7_draw(){
@@ -330,6 +339,22 @@ void game_scene9_draw(){
     al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene9_destroy(){
+    al_destroy_bitmap(background);
+}
+
+void game_scene10_init(){
+    background = al_load_bitmap("./image/levelup.png");
+}
+void game_scene10_draw(){
+    al_draw_bitmap(background, 0, 0, 0);
+    sprintf(s, "%d", score);
+    sprintf(c, "%d", coin);
+    sprintf(l, "%d", level);
+    al_draw_text(font, al_map_rgb(0,0,0), 350, 50, 0, s);
+    al_draw_text(font, al_map_rgb(0,0,0), 520, 50, 0, c);
+    al_draw_text(font, al_map_rgb(0,0,0), 200, 55, 0, l);
+}
+void game_scene10_destroy(){
     al_destroy_bitmap(background);
 }
 

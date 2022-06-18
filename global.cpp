@@ -11,23 +11,27 @@ const int RIGHT = MIDDLE + 180;
 
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *fps = NULL;
+
 ALLEGRO_SAMPLE*song = NULL;
 ALLEGRO_SAMPLE_INSTANCE*sample_instance;
-ALLEGRO_SAMPLE*song2 = NULL;
-ALLEGRO_SAMPLE_INSTANCE*sample_instance2;
+ALLEGRO_SAMPLE*song11 = NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instance11;
+ALLEGRO_SAMPLE*song12= NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instance12;
+
 ALLEGRO_DISPLAY*display = NULL;
 ALLEGRO_FONT *font = NULL;
 bool judge_next_window = false;
 bool* mouse_state;// Mouse position.
 bool pause = false;
 
-int level = 1;
-
 int next = 0;
 int score;
-char s[20000];
-int coin = 500;
-char c[20000];
+char s[20];
+int coin = 0;
+char c[20];
+int level = 1;
+char l[20];
 
 int nowchar = 1;
 bool longneck = false;
@@ -40,7 +44,9 @@ bool butterfly = false;
 bool cry = false;
 bool thunder = false;
 
+bool bubble=false;
+
 MovableObject chara;
-MovableObject nose[50];
+MovableObject nose[20];
 
 

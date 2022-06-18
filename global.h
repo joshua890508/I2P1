@@ -19,6 +19,7 @@ enum {
     SCENE_PAUSE = 7,
     SCENE_WIN = 8,
     SCENE_LOSE = 9,
+    SCENE_LEVELUP = 10,
 };
 
 typedef struct
@@ -32,7 +33,7 @@ typedef struct
     ALLEGRO_BITMAP *img_move;
 }MovableObject;
 extern MovableObject chara;
-extern MovableObject nose[50];
+extern MovableObject nose[20];
 // note that you can't assign initial value here!
 extern const float FPS;
 extern const int WIDTH;
@@ -47,18 +48,22 @@ extern bool judge_next_window;
 
 extern int next;
 extern int score;
-extern char s[20000];
+extern char s[20];
 extern int coin;
-extern char c[20000];
-
+extern char c[20];
 extern int level;
+extern char l[20];
 
 extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
+
 extern ALLEGRO_SAMPLE*song;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instance;
-extern ALLEGRO_SAMPLE*song2;
-extern ALLEGRO_SAMPLE_INSTANCE*sample_instance2;
+extern ALLEGRO_SAMPLE*song11;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instance11;
+extern ALLEGRO_SAMPLE*song12;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instance12;
+
 extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;
 extern bool* mouse_state;
@@ -74,4 +79,6 @@ extern bool hat;
 extern bool butterfly;
 extern bool cry;
 extern bool thunder;
+
+extern bool bubble;
 #endif

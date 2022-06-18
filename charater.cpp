@@ -1,17 +1,22 @@
 #include "charater.h"
 
+char temp[50];
+unsigned int position;
 bool A,D;
+///ALLEGRO_BITMAP *spause = NULL;
 
 void character_init(){
     // load character images
-    char temp[50];
-    sprintf( temp, "./image/chara%d0.png", nowchar );
+    //sprintf( temp, "./image/chara%d 0.png", nowchar );
+    sprintf( temp, "./image/%d.png", nowchar );
     chara.img_move = al_load_bitmap(temp);
+
+    ///spause = al_load_bitmap("./image/smallpause.png");
     // initial the geometric information of character
     chara.w = al_get_bitmap_width(chara.img_move);
     chara.h = al_get_bitmap_height(chara.img_move);
     chara.x = MIDDLE - chara.w/2;
-    chara.y = 900 - chara.h/2;
+    chara.y = /*900*/750 - chara.h/2;
     chara.dir = false;
 }
 void charater_process(ALLEGRO_EVENT event){
@@ -21,25 +26,41 @@ void charater_process(ALLEGRO_EVENT event){
             judge_next_window = true;
             next = SCENE_PAUSE;
         }
-        else if( event.keyboard.keycode == ALLEGRO_KEY_A )
+        else if( event.keyboard.keycode == ALLEGRO_KEY_A && !bubble)
             A = true;
-        else if( event.keyboard.keycode == ALLEGRO_KEY_D )
+        else if( event.keyboard.keycode == ALLEGRO_KEY_D && !bubble)
             D = true;
         else if( event.keyboard.keycode == ALLEGRO_KEY_J )
         {
-            unsigned int position;
             pause=!pause;
             if(pause)
             {
-                position=al_get_sample_instance_position(sample_instance2);
-                al_stop_timer(fps);
-                al_stop_sample_instance(sample_instance2);
+                if(level==1)
+                {
+                    position=al_get_sample_instance_position(sample_instance11);
+                    al_stop_timer(fps);
+                    al_stop_sample_instance(sample_instance11);
+                }else if(level==2)
+                {
+                    position=al_get_sample_instance_position(sample_instance12);
+                    al_stop_timer(fps);
+                    al_stop_sample_instance(sample_instance12);
+                }
             }
             else
             {
-                al_set_sample_instance_position(sample_instance2,position);
-                al_start_timer(fps);
-                al_play_sample_instance(sample_instance2);
+                if(level==1)
+                {
+                    al_set_sample_instance_position(sample_instance11,position);
+                    al_start_timer(fps);
+                    al_play_sample_instance(sample_instance11);
+                }
+                else if(level==2)
+                {
+                    al_set_sample_instance_position(sample_instance12,position);
+                    al_start_timer(fps);
+                    al_play_sample_instance(sample_instance12);
+                }
             }
         }
 }
@@ -47,12 +68,14 @@ void charater_update(){
     // use the idea of finite state machine to deal with different state
     if( A ){
         chara.dir = false;
-        if(chara.x>LEFT - chara.w/2)chara.x -= 180;
+        if(chara.x>LEFT - chara.w/2)
+            chara.x -= 180;
         A = false;
     }
     else if( D ){
         chara.dir = true;
-        if(chara.x < RIGHT - chara.w/2)chara.x += 180;
+        if(chara.x < RIGHT - chara.w/2)
+            chara.x += 180;
         D = false;
     }
 }
@@ -65,4 +88,5 @@ void character_draw(){
 }
 void character_destory(){
     al_destroy_bitmap(chara.img_move);
+    ///al_destroy_bitmap(spause);
 }
