@@ -3,7 +3,8 @@
 int mouse_x, mouse_y;
 
 ALLEGRO_BITMAP *background = NULL;
-
+ALLEGRO_BITMAP *V = NULL;
+ALLEGRO_BITMAP *get = NULL;
 
 bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
 	if (px < w && py > y) {
@@ -170,13 +171,17 @@ void on_mouse_down(int btn, int x, int y) {
                     thunder=true;
                 }
             }else if (pnt_in_rect(x, y, 110, 360, 230, 460)){
-                if(hat)nowitem[0] = !nowitem[0];
+                if(hat && nowitem != 1)nowitem = 1;
+                else nowitem = 0;
             }else if (pnt_in_rect(x, y, 245, 360, 364, 460)){
-                if(butterfly)nowitem[1] = !nowitem[1];
+                if(butterfly && nowitem != 2)nowitem = 2;
+                else nowitem = 0;
             }else if (pnt_in_rect(x, y, 380, 360, 500, 460)){
-                if(cry)nowitem[2] = !nowitem[2];
+                if(cry && nowitem != 3)nowitem = 3;
+                else nowitem = 0;
             }else if (pnt_in_rect(x, y, 105, 522, 228, 630)){
-                if(thunder)nowitem[3] = !nowitem[3];
+                if(thunder && nowitem != 4)nowitem = 4;
+                else nowitem = 0;
             }
         }
         else if (window==SCENE_PAUSE)
@@ -190,6 +195,9 @@ void on_mouse_down(int btn, int x, int y) {
             }else if (pnt_in_rect(x, y, 300, 0, 600, 450)){
                 judge_next_window = true;
                 next=SCENE_HOWTOPLAY;
+            }else if (pnt_in_rect(x, y, 0, 0, 300, 450)){
+                judge_next_window = true;
+                next=SCENE_GAME;
             }
         }
 	}
@@ -228,7 +236,7 @@ void game_scene2_destroy(){
 }
 
 void game_scene3_init(){
-    background = al_load_bitmap("./image/about.jpg");
+    background = al_load_bitmap("./image/about.png");
 }
 void game_scene3_draw(){
     al_draw_bitmap(background, 0, 0, 0);
@@ -249,31 +257,54 @@ void game_scene4_destroy(){
 
 void game_scene5_init(){
     background = al_load_bitmap("./image/Store (1).jpg");
+    V = al_load_bitmap("./image/V.png");
+    get = al_load_bitmap("./image/get.png");
 }
 void game_scene5_draw(){
     al_draw_bitmap(background, 0, 0, 0);
     sprintf(c, "%d", coin);
     al_draw_text(font,al_map_rgb(0,0,0),390,200,0,c);
+    if(nowchar == 1)al_draw_bitmap(V, 205, 435, 0);
+    else if(nowchar == 2)al_draw_bitmap(V, 335, 435, 0);
+    else if(nowchar == 3)al_draw_bitmap(V, 469, 435, 0);
+    else if(nowchar == 4)al_draw_bitmap(V, 197, 600, 0);
+    if(longneck)al_draw_bitmap(get, 262,472, 0);
+    if(penguin)al_draw_bitmap(get, 400, 472, 0);
+    if(dog)al_draw_bitmap(get, 130, 641, 0);
 }
 void game_scene5_destroy(){
     al_destroy_bitmap(background);
+    al_destroy_bitmap(V);
+    al_destroy_bitmap(get);
 }
 
 void game_scene6_init(){
     background = al_load_bitmap("./image/ITEM.jpg");
+    V = al_load_bitmap("./image/V.png");
+    get = al_load_bitmap("./image/get.png");
 }
 void game_scene6_draw(){
     al_draw_bitmap(background, 0, 0, 0);
     sprintf(c, "%d", coin);
     al_draw_text(font,al_map_rgb(0,0,0),390,200,0,c);
+    if(nowitem == 1)al_draw_bitmap(V, 205, 435, 0);
+    else if(nowitem == 2)al_draw_bitmap(V, 335, 435, 0);
+    else if(nowitem == 3)al_draw_bitmap(V, 469, 435, 0);
+    else if(nowitem == 4)al_draw_bitmap(V, 197, 600, 0);
+    if(hat)al_draw_bitmap(get, 127, 475, 0);
+    if(butterfly)al_draw_bitmap(get, 265, 475, 0);
+    if(cry)al_draw_bitmap(get, 400, 475, 0);
+    if(thunder)al_draw_bitmap(get, 130, 641, 0);
 }
 void game_scene6_destroy(){
     al_destroy_bitmap(background);
+    al_destroy_bitmap(V);
+    al_destroy_bitmap(get);
 }
 
 void game_scene7_init(){
     al_stop_sample_instance(sample_instance2);
-    background = al_load_bitmap("./image/Pause.jpg");
+    background = al_load_bitmap("./image/Pause.png");
 }
 void game_scene7_draw(){
     al_draw_bitmap(background, 0, 0, 0);

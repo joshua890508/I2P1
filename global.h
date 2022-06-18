@@ -28,7 +28,7 @@ typedef struct
     int v;// velocity
 	bool hidden;// Should we draw this object on the screen.
     bool dir; // left/down: false, right/up: true
-    int type;//nose or coin
+    int type;//nose=0 or coin=1
     ALLEGRO_BITMAP *img_move;
 }MovableObject;
 extern MovableObject chara;
@@ -41,13 +41,18 @@ extern const int HEIGHT;
 extern const int LEFT;
 extern const int MIDDLE;
 extern const int RIGHT;
+
+extern int window;
 extern bool judge_next_window;
+
 extern int next;
 extern int score;
 extern char s[20000];
 extern int coin;
 extern char c[20000];
-extern int window;
+
+extern int level;
+
 extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
 extern ALLEGRO_SAMPLE*song;
@@ -64,7 +69,7 @@ extern bool longneck;
 extern bool penguin;
 extern bool dog;
 
-extern bool nowitem[4];
+extern int nowitem;
 extern bool hat;
 extern bool butterfly;
 extern bool cry;

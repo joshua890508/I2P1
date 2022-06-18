@@ -70,10 +70,10 @@ void game_begin() {
     al_set_sample_instance_gain(sample_instance, 1) ;
 
     //Load font
-    font=al_load_ttf_font("./font/pirulen.ttf",30,0);
+    font=al_load_ttf_font("./font/abg.ttf",35,0);
 
     // Load sound2
-    song2 = al_load_sample("./sound/01_BGM.wav");
+    song2 = al_load_sample("./sound/1-1.wav");
     al_reserve_samples(20);
     sample_instance2 = al_create_sample_instance(song2);
     // Loop the song until the display closes
@@ -182,6 +182,11 @@ void game_update(){
                 game_scene4_init();
                 judge_next_window = false;
                 window = SCENE_HOWTOPLAY;
+            }else if(next==SCENE_GAME)
+            {
+                game_scene2_init();
+                judge_next_window = false;
+                window = 2;
             }
         }
         else if( window == SCENE_WIN || window == SCENE_LOSE){

@@ -4,15 +4,14 @@ bool A,D;
 
 void character_init(){
     // load character images
-    if(nowchar == 1)chara.img_move = al_load_bitmap("./image/elephant.png");
-    else if(nowchar == 2)chara.img_move = al_load_bitmap("./image/longneck.jpg");
-    else if(nowchar == 3)chara.img_move = al_load_bitmap("./image/penguin.jpg");
-    else if(nowchar == 4)chara.img_move = al_load_bitmap("./image/dog.png");
+    char temp[50];
+    sprintf( temp, "./image/chara%d0.png", nowchar );
+    chara.img_move = al_load_bitmap(temp);
     // initial the geometric information of character
     chara.w = al_get_bitmap_width(chara.img_move);
     chara.h = al_get_bitmap_height(chara.img_move);
     chara.x = MIDDLE - chara.w/2;
-    chara.y = 720 - chara.h/2;
+    chara.y = 900 - chara.h/2;
     chara.dir = false;
 }
 void charater_process(ALLEGRO_EVENT event){
@@ -28,14 +27,17 @@ void charater_process(ALLEGRO_EVENT event){
             D = true;
         else if( event.keyboard.keycode == ALLEGRO_KEY_J )
         {
+            unsigned int position;
             pause=!pause;
             if(pause)
             {
+                position=al_get_sample_instance_position(sample_instance2);
                 al_stop_timer(fps);
                 al_stop_sample_instance(sample_instance2);
             }
             else
             {
+                al_set_sample_instance_position(sample_instance2,position);
                 al_start_timer(fps);
                 al_play_sample_instance(sample_instance2);
             }
@@ -50,7 +52,7 @@ void charater_update(){
     }
     else if( D ){
         chara.dir = true;
-        if(chara.x<RIGHT - chara.w/2)chara.x += 180;
+        if(chara.x < RIGHT - chara.w/2)chara.x += 180;
         D = false;
     }
 }
