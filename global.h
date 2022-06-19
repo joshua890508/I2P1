@@ -20,6 +20,7 @@ enum {
     SCENE_WIN = 8,
     SCENE_LOSE = 9,
     SCENE_LEVELUP = 10,
+    SCENE_TARGET = 11,
 };
 
 typedef struct
@@ -67,6 +68,16 @@ extern ALLEGRO_SAMPLE*song12;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instance12;
 extern ALLEGRO_SAMPLE*song13;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instance13;
+extern ALLEGRO_SAMPLE*bubblee;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancebubble;
+extern ALLEGRO_SAMPLE*coinn;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancecoin;
+extern ALLEGRO_SAMPLE*starrr;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancestar;
+extern ALLEGRO_SAMPLE*click;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instanceclick;
+extern ALLEGRO_SAMPLE*fir;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancefire;
 
 extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;

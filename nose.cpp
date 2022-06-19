@@ -104,7 +104,12 @@ void nose_update(){
                     if(level == 1)
                     {
                         score+=5;
-                        if(nose[i].type==0)coin+=3;
+                        if(nose[i].type==0)
+                        {
+                            al_play_sample_instance(sample_instancecoin);
+                            coin+=3;
+                        }
+
                     }
                     else if(level == 2 || level == 3)
                     {
@@ -115,14 +120,19 @@ void nose_update(){
                         }
                         score+=5;
                         if(nose[i].type==0)
+                        {
+                            al_play_sample_instance(sample_instancecoin);
                             coin+=3;
+                        }
                         else if(nose[i].type==1)
                         {
+                            al_play_sample_instance(sample_instancestar);
                             star=true;
                             startstar=i;
                         }
                         else if(nose[i].type==2)
                         {
+                            al_play_sample_instance(sample_instancebubble);
                             score-=5;
                             bubble=true;
                             startbubble=i;
@@ -161,7 +171,10 @@ void nose_update(){
             fire[i].y+=fire[i].v;
             if (fire[i].y>=550 && fire[i].y<=560)//same y position
                 if(chara.x+chara.w/2==fire[i].x+fire[i].w/2)//same x position
+                {
+                    al_play_sample_instance(sample_instancefire);
                     score-=10,coin-=10;
+                }
         }
 }
 

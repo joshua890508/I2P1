@@ -52,7 +52,7 @@ void game_init() {
 	mouse_state = (bool*)malloc((m_buttons + 1) * sizeof(bool));
 	memset(mouse_state, false, (m_buttons + 1) * sizeof(bool));
     // initialize the icon on the display
-    ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.jpg");
+    ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.png");
     al_set_display_icon(display, icon);
 }
 
@@ -103,6 +103,11 @@ void game_begin() {
     // set the volume of instance
     al_set_sample_instance_gain(sample_instance13, 1) ;
 
+    click = al_load_sample("./sound/click.wav");
+    sample_instanceclick  = al_create_sample_instance(click);
+    al_set_sample_instance_playmode(sample_instanceclick, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instanceclick, al_get_default_mixer());
+
     al_start_timer(fps);
     // initialize the menu before entering the loop
     menu_init();
@@ -111,11 +116,11 @@ void game_begin() {
 void game_update(){
     if( judge_next_window ){
         if( window == SCENE_MENU ){
-            if(next==SCENE_GAME)
+            if(next==SCENE_TARGET)
             {
-                game_scene2_init();
+                game_scene11_init();
                 judge_next_window = false;
-                window = 2;
+                window = 11;
             }else if(next==SCENE_ABOUT)
             {
                 game_scene3_init();
@@ -225,6 +230,14 @@ void game_update(){
             }
         }
         else if( window == SCENE_LEVELUP){
+            if(next==SCENE_TARGET)
+            {
+                game_scene11_init();
+                judge_next_window = false;
+                window = 11;
+            }
+        }
+        else if( window == SCENE_TARGET){
             if(next==SCENE_GAME)
             {
                 game_scene2_init();
@@ -278,6 +291,8 @@ void game_draw(){
         game_scene9_draw();
     }else if( window == 10 ){
         game_scene10_draw();
+    }else if( window == 11 ){
+        game_scene11_draw();
     }
     al_flip_display();
 }
@@ -310,5 +325,6 @@ void game_destroy() {
     game_scene8_destroy();
     game_scene9_destroy();
     game_scene10_destroy();
+    game_scene11_destroy();
     free(mouse_state);
 }

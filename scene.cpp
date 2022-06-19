@@ -4,6 +4,8 @@ ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_BITMAP *V = NULL;
 ALLEGRO_BITMAP *get = NULL;
 ALLEGRO_BITMAP *starr = NULL;
+ALLEGRO_SAMPLE *buy = NULL;
+ALLEGRO_SAMPLE_INSTANCE *sample_instancebuy;
 
 bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
 	if (px < w && py > y) {
@@ -77,11 +79,12 @@ void pause_process(ALLEGRO_EVENT event){
 */
 void on_mouse_down(int btn, int x, int y) {
 	if (btn == 1) {
+        al_play_sample_instance(sample_instanceclick);
         if (window==SCENE_MENU)
         {
             if (pnt_in_rect(x, y, 350, 470, 495, 520)){
                 judge_next_window = true;
-                next=SCENE_GAME;
+                next=SCENE_TARGET;
             }else if (pnt_in_rect(x, y, 350, 550, 475, 600)){
                 judge_next_window = true;
                 next=SCENE_ABOUT;
@@ -91,6 +94,13 @@ void on_mouse_down(int btn, int x, int y) {
             }else if (pnt_in_rect(x, y, 350, 720, 480, 780)){
                 judge_next_window = true;
                 next=SCENE_STORE;
+            }
+        }
+        else if (window==SCENE_MENU)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 600, 900)){
+                judge_next_window = true;
+                next=SCENE_GAME;
             }
         }
         else if (window==SCENE_ABOUT||window==SCENE_HOWTOPLAY||window==SCENE_WIN||window==SCENE_LOSE)
@@ -111,12 +121,14 @@ void on_mouse_down(int btn, int x, int y) {
             }else if (pnt_in_rect(x, y, 265, 470, 340, 500)){
                 if(coin>=50 && !longneck)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=50;
                     longneck=true;
                 }
             }else if (pnt_in_rect(x, y, 400, 470, 480, 500)){
                 if(coin>=50 && !penguin)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=50;
                     penguin=true;
                 }
@@ -124,6 +136,7 @@ void on_mouse_down(int btn, int x, int y) {
             else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
                 if(coin>=50 && !dog)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=50;
                     dog=true;
                 }
@@ -148,24 +161,28 @@ void on_mouse_down(int btn, int x, int y) {
             }else if (pnt_in_rect(x, y, 130, 470, 210, 505)){
                 if(coin>=30 && !hat)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=30;
                     hat=true;
                 }
             }else if (pnt_in_rect(x, y, 265, 470, 340, 500)){
                 if(coin>=30 && !butterfly)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=30;
                     butterfly=true;
                 }
             }else if (pnt_in_rect(x, y, 400, 470, 480, 500)){
                 if(coin>=30 && !cry)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=30;
                     cry=true;
                 }
             }else if (pnt_in_rect(x, y, 129, 640, 205, 673)){
                 if(coin>=30 && !thunder)
                 {
+                    al_play_sample_instance(sample_instancebuy);
                     coin-=30;
                     thunder=true;
                 }
@@ -203,6 +220,13 @@ void on_mouse_down(int btn, int x, int y) {
         {
             if (pnt_in_rect(x, y, 0, 0, 600, 900)){
                 judge_next_window = true;
+                next=SCENE_TARGET;
+            }
+        }
+        else if (window==SCENE_TARGET)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 600, 900)){
+                judge_next_window = true;
                 next=SCENE_GAME;
             }
         }
@@ -237,6 +261,28 @@ void game_scene2_init(){
     nose_init();
     background = al_load_bitmap("./image/Game_backgound.png");
     starr = al_load_bitmap("./image/starr.png");
+
+    bubblee = al_load_sample("./sound/bubble.wav");
+    sample_instancebubble  = al_create_sample_instance(bubblee);
+    al_set_sample_instance_playmode(sample_instancebubble, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancebubble, al_get_default_mixer());
+
+    coinn = al_load_sample("./sound/coin.wav");
+    sample_instancecoin  = al_create_sample_instance(coinn);
+    al_set_sample_instance_playmode(sample_instancecoin, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancecoin, al_get_default_mixer());
+    al_set_sample_instance_gain(sample_instancecoin, 0.5) ;
+
+    starrr = al_load_sample("./sound/star.mp3");
+    sample_instancestar  = al_create_sample_instance(starrr);
+    al_set_sample_instance_playmode(sample_instancestar, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancestar, al_get_default_mixer());
+
+    fir = al_load_sample("./sound/fire.mp3");
+    sample_instancefire  = al_create_sample_instance(fir);
+    al_set_sample_instance_playmode(sample_instancefire, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancefire, al_get_default_mixer());
+    al_set_sample_instance_gain(sample_instancefire, 2) ;
 }
 void game_scene2_draw(){
     if(!star)al_draw_bitmap(background, 0, 0, 0);
@@ -248,6 +294,7 @@ void game_scene2_destroy(){
     al_destroy_bitmap(background);
     character_destory();
     nose_destory();
+    al_destroy_sample_instance(sample_instancebubble);
 }
 
 void game_scene3_init(){
@@ -274,6 +321,11 @@ void game_scene5_init(){
     background = al_load_bitmap("./image/Store (1).jpg");
     V = al_load_bitmap("./image/V.png");
     get = al_load_bitmap("./image/get.png");
+
+    buy = al_load_sample("./sound/buy.mp3");
+    sample_instancebuy  = al_create_sample_instance(buy);
+    al_set_sample_instance_playmode(sample_instancebuy, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancebuy, al_get_default_mixer());
 }
 void game_scene5_draw(){
     al_draw_bitmap(background, 0, 0, 0);
@@ -286,11 +338,13 @@ void game_scene5_draw(){
     if(longneck)al_draw_bitmap(get, 262,472, 0);
     if(penguin)al_draw_bitmap(get, 400, 472, 0);
     if(dog)al_draw_bitmap(get, 130, 641, 0);
+
 }
 void game_scene5_destroy(){
     al_destroy_bitmap(background);
     al_destroy_bitmap(V);
     al_destroy_bitmap(get);
+    al_destroy_sample_instance(sample_instancebuy);
 }
 
 void game_scene6_init(){
@@ -363,6 +417,16 @@ void game_scene10_draw(){
     al_draw_text(font, al_map_rgb(0,0,0), 200, 55, 0, l);
 }
 void game_scene10_destroy(){
+    al_destroy_bitmap(background);
+}
+
+void game_scene11_init(){
+    background = al_load_bitmap("./image/target.png");
+}
+void game_scene11_draw(){
+    al_draw_bitmap(background, 0, 0, 0);
+}
+void game_scene11_destroy(){
     al_destroy_bitmap(background);
 }
 
