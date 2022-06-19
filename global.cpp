@@ -41,9 +41,9 @@ bool pause = false;
 int next = 0;
 int score;
 char s[20];
-int coin = 500;
+int coin = 0;
 char c[20];
-int level = 1;
+int level = 2;
 char l[20];
 
 int nowchar = 1;
@@ -62,7 +62,7 @@ bool star=false;
 
 MovableObject chara;
 MovableObject nose[100];
-MovableObject fire[5];
+MovableObject fire[6];
 
 int mouse_x, mouse_y;
 

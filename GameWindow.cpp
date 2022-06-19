@@ -230,6 +230,7 @@ void game_update(){
                 window = SCENE_HOWTOPLAY;
             }else if(next==SCENE_GAME)
             {
+                level = 1;
                 game_scene2_init();
                 judge_next_window = false;
                 window = 2;

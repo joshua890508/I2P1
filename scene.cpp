@@ -420,6 +420,7 @@ void game_scene9_destroy(){
 }
 
 void game_scene10_init(){
+
     background = al_load_bitmap("./image/levelup.png");
 }
 void game_scene10_draw(){
@@ -436,10 +437,18 @@ void game_scene10_destroy(){
 }
 
 void game_scene11_init(){
+    score = 0;
     background = al_load_bitmap("./image/target.png");
 }
 void game_scene11_draw(){
     al_draw_bitmap(background, 0, 0, 0);
+    al_draw_bitmap(background, 0, 0, 0);
+    sprintf(s, "%d", score);
+    sprintf(c, "%d", coin);
+    sprintf(l, "%d", level);
+    al_draw_text(font, al_map_rgb(0,0,0), 350, 50, 0, s);
+    al_draw_text(font, al_map_rgb(0,0,0), 520, 50, 0, c);
+    al_draw_text(font, al_map_rgb(0,0,0), 200, 55, 0, l);
 }
 void game_scene11_destroy(){
     al_destroy_bitmap(background);

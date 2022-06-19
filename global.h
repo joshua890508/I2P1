@@ -26,9 +26,9 @@ enum {
 
 typedef struct
 {
-    int x,y; // the position of image
-    int w,h; // the width and height of image
-    int v;// velocity
+    float x,y; // the position of image
+    float w,h; // the width and height of image
+    float v;// velocity
 	bool hidden;// Should we draw this object on the screen.
     bool dir; // left/down: false, right/up: true
     int type;//nose=0 or coin=1
@@ -36,7 +36,7 @@ typedef struct
 }MovableObject;
 extern MovableObject chara;
 extern MovableObject nose[100];
-extern MovableObject fire[5];
+extern MovableObject fire[6];
 
 // note that you can't assign initial value here!
 extern const float FPS;
