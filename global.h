@@ -21,6 +21,7 @@ enum {
     SCENE_LOSE = 9,
     SCENE_LEVELUP = 10,
     SCENE_TARGET = 11,
+    SCENE_HOWTOPLAY2 = 12,
 };
 
 typedef struct

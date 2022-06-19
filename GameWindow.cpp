@@ -138,12 +138,26 @@ void game_update(){
                 window = 5;
             }
         }
-        else if( window == SCENE_ABOUT || window == SCENE_HOWTOPLAY){
+        else if( window == SCENE_ABOUT){
             if(next==SCENE_MENU)
             {
                 menu_init();
                 judge_next_window = false;
                 window = SCENE_MENU;
+            }
+        }
+        else if( window == SCENE_HOWTOPLAY){
+            if(next==SCENE_MENU)
+            {
+                menu_init();
+                judge_next_window = false;
+                window = SCENE_MENU;
+            }
+            else if(next==SCENE_HOWTOPLAY2)
+            {
+                game_scene12_init();
+                judge_next_window = false;
+                window = SCENE_HOWTOPLAY2;
             }
         }
         else if( window == SCENE_STORE){
@@ -245,6 +259,20 @@ void game_update(){
                 window = 2;
             }
         }
+        else if( window == SCENE_HOWTOPLAY2){
+            if(next==SCENE_MENU)
+            {
+                menu_init();
+                judge_next_window = false;
+                window = SCENE_MENU;
+            }
+            else if(next==SCENE_HOWTOPLAY)
+            {
+                game_scene4_init();
+                judge_next_window = false;
+                window = SCENE_HOWTOPLAY;
+            }
+        }
     }
     else if( window == SCENE_GAME ){
         charater_update();
@@ -293,6 +321,8 @@ void game_draw(){
         game_scene10_draw();
     }else if( window == 11 ){
         game_scene11_draw();
+    }else if( window == 12 ){
+        game_scene12_draw();
     }
     al_flip_display();
 }
@@ -326,5 +356,6 @@ void game_destroy() {
     game_scene9_destroy();
     game_scene10_destroy();
     game_scene11_destroy();
+    game_scene12_destroy();
     free(mouse_state);
 }

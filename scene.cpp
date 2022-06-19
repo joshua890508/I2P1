@@ -103,11 +103,33 @@ void on_mouse_down(int btn, int x, int y) {
                 next=SCENE_GAME;
             }
         }
-        else if (window==SCENE_ABOUT||window==SCENE_HOWTOPLAY||window==SCENE_WIN||window==SCENE_LOSE)
+        else if (window==SCENE_ABOUT||window==SCENE_WIN||window==SCENE_LOSE)
         {
             if (pnt_in_rect(x, y, 0, 0, 600, 900)){
                 judge_next_window = true;
                 next=SCENE_MENU;
+            }
+        }
+        else if (window==SCENE_HOWTOPLAY)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 600, 450)){
+                judge_next_window = true;
+                next=SCENE_MENU;
+            }
+            else if (pnt_in_rect(x, y, 0, 450, 600, 900)){
+                judge_next_window = true;
+                next=SCENE_HOWTOPLAY2;
+            }
+        }
+        else if (window==SCENE_HOWTOPLAY2)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 600, 450)){
+                judge_next_window = true;
+                next=SCENE_MENU;
+            }
+            else if (pnt_in_rect(x, y, 0, 450, 600, 900)){
+                judge_next_window = true;
+                next=SCENE_HOWTOPLAY;
             }
         }
         else if (window==SCENE_STORE)
@@ -230,13 +252,6 @@ void on_mouse_down(int btn, int x, int y) {
                 next=SCENE_GAME;
             }
         }
-        /*else if (window==SCENE_GAME)
-        {
-            if (pnt_in_rect(x, y, 0, 0, 100, 100)){
-                judge_next_window = true;
-                next=SCENE_PAUSE;
-            }
-        }*/
 	}
 }
 
@@ -308,7 +323,7 @@ void game_scene3_destroy(){
 }
 
 void game_scene4_init(){
-    background = al_load_bitmap("./image/Howtoplay.jpg");
+    background = al_load_bitmap("./image/howtoplay01.png");
 }
 void game_scene4_draw(){
     al_draw_bitmap(background, 0, 0, 0);
@@ -427,6 +442,16 @@ void game_scene11_draw(){
     al_draw_bitmap(background, 0, 0, 0);
 }
 void game_scene11_destroy(){
+    al_destroy_bitmap(background);
+}
+
+void game_scene12_init(){
+    background = al_load_bitmap("./image/howtoplay02.png");
+}
+void game_scene12_draw(){
+    al_draw_bitmap(background, 0, 0, 0);
+}
+void game_scene12_destroy(){
     al_destroy_bitmap(background);
 }
 

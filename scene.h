@@ -51,5 +51,9 @@ void game_scene11_init();
 void game_scene11_draw();
 void game_scene11_destroy();
 
+void game_scene12_init();
+void game_scene12_draw();
+void game_scene12_destroy();
+
 
 

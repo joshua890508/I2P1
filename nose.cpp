@@ -52,7 +52,7 @@ void nose_init()
             max = 2;
             nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
             nose[i].y = 100 - nose[i].h/2;
-            nose[i].v = 8;
+            nose[i].v = 7;
             nose[i].hidden = true;
         }
         else if(level==3)
@@ -69,7 +69,7 @@ void nose_init()
             max = 2;
             nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
             nose[i].y = 100 - nose[i].h/2;
-            nose[i].v = 8;
+            nose[i].v = 7;
             nose[i].hidden = true;
         }
     }
@@ -90,7 +90,7 @@ void nose_update(){
                 else if(i==12)fire[4].hidden=false;
             }
             nose[i].y+=nose[i].v;
-            if (nose[i].y>=WIDTH/2 && nose[i].y<=WIDTH/2+(chara.h+nose[i].h)/4)//next nose
+            if (nose[i].y>=285 && nose[i].y<=310)//next nose
              {
                 nose[i+1].hidden=false;
                 if(star && i == startstar+4)star=false;
