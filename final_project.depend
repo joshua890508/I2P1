@@ -675,13 +675,13 @@
 1654422048 source:c:\users\joshua\desktop\i2p1_final_project-master\scene.cpp
 	"scene.h"
 
-1655572112 source:c:\users\joshua\desktop\i2p1\charater.cpp
+1655630495 source:c:\users\joshua\desktop\i2p1\charater.cpp
 	"charater.h"
 
-1653702747 c:\users\joshua\desktop\i2p1\charater.h
+1655608517 c:\users\joshua\desktop\i2p1\charater.h
 	"global.h"
 
-1655568944 c:\users\joshua\desktop\i2p1\global.h
+1655629959 c:\users\joshua\desktop\i2p1\global.h
 	<stdio.h>
 	<allegro5/allegro.h>
 	<allegro5/allegro_primitives.h>
@@ -992,7 +992,7 @@
 	"allegro5/allegro.h"
 	"allegro5/allegro_font.h"
 
-1655565446 source:c:\users\joshua\desktop\i2p1\gamewindow.cpp
+1655630495 source:c:\users\joshua\desktop\i2p1\gamewindow.cpp
 	"GameWindow.h"
 
 1655364959 c:\users\joshua\desktop\i2p1\gamewindow.h
@@ -1001,21 +1001,21 @@
 	"scene.h"
 	"nose.h"
 
-1655564035 c:\users\joshua\desktop\i2p1\scene.h
+1655630495 c:\users\joshua\desktop\i2p1\scene.h
 	"global.h"
 	"charater.h"
 	"nose.h"
 
-1655572723 source:c:\users\joshua\desktop\i2p1\global.cpp
+1655629959 source:c:\users\joshua\desktop\i2p1\global.cpp
 	"global.h"
 
 1655369051 source:c:\users\joshua\desktop\i2p1\main.cpp
 	"GameWindow.h"
 
-1655571795 source:c:\users\joshua\desktop\i2p1\scene.cpp
+1655630596 source:c:\users\joshua\desktop\i2p1\scene.cpp
 	"scene.h"
 
-1655573166 source:c:\users\joshua\desktop\i2p1\nose.cpp
+1655629959 source:c:\users\joshua\desktop\i2p1\nose.cpp
 	"nose.h"
 
 1655358423 c:\users\joshua\desktop\i2p1\nose.h

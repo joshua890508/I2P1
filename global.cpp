@@ -18,6 +18,8 @@ ALLEGRO_SAMPLE*song11 = NULL;
 ALLEGRO_SAMPLE_INSTANCE*sample_instance11;
 ALLEGRO_SAMPLE*song12= NULL;
 ALLEGRO_SAMPLE_INSTANCE*sample_instance12;
+ALLEGRO_SAMPLE*song13= NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instance13;
 
 ALLEGRO_DISPLAY*display = NULL;
 ALLEGRO_FONT *font = NULL;
@@ -28,7 +30,7 @@ bool pause = false;
 int next = 0;
 int score;
 char s[20];
-int coin = 0;
+int coin = 500;
 char c[20];
 int level = 1;
 char l[20];
@@ -45,8 +47,12 @@ bool cry = false;
 bool thunder = false;
 
 bool bubble=false;
+bool star=false;
 
 MovableObject chara;
-MovableObject nose[20];
+MovableObject nose[100];
+MovableObject fire[5];
+
+int mouse_x, mouse_y;
 
 

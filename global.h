@@ -33,7 +33,9 @@ typedef struct
     ALLEGRO_BITMAP *img_move;
 }MovableObject;
 extern MovableObject chara;
-extern MovableObject nose[20];
+extern MovableObject nose[100];
+extern MovableObject fire[5];
+
 // note that you can't assign initial value here!
 extern const float FPS;
 extern const int WIDTH;
@@ -63,6 +65,8 @@ extern ALLEGRO_SAMPLE*song11;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instance11;
 extern ALLEGRO_SAMPLE*song12;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instance12;
+extern ALLEGRO_SAMPLE*song13;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instance13;
 
 extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;
@@ -81,4 +85,9 @@ extern bool cry;
 extern bool thunder;
 
 extern bool bubble;
+extern bool star;
+
+void on_mouse_down(int btn, int x, int y);
+bool pnt_in_rect(int px, int py, int x, int y, int w, int h);
+extern int mouse_x, mouse_y;
 #endif

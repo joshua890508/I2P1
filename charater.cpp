@@ -2,8 +2,8 @@
 
 char temp[50];
 unsigned int position;
-bool A,D;
-///ALLEGRO_BITMAP *spause = NULL;
+int A=0,D=0;
+ALLEGRO_BITMAP *spause = NULL;
 
 void character_init(){
     // load character images
@@ -11,27 +11,43 @@ void character_init(){
     sprintf( temp, "./image/%d.png", nowchar );
     chara.img_move = al_load_bitmap(temp);
 
-    ///spause = al_load_bitmap("./image/smallpause.png");
     // initial the geometric information of character
     chara.w = al_get_bitmap_width(chara.img_move);
     chara.h = al_get_bitmap_height(chara.img_move);
     chara.x = MIDDLE - chara.w/2;
-    chara.y = /*900*/750 - chara.h/2;
-    chara.dir = false;
+    if(nowchar == 1){
+        chara.y = 650 - chara.h/2;
+    }
+    else if(nowchar == 2){
+        chara.y = 750 - chara.h/2;
+    }
+    else if(nowchar == 3){
+        chara.y = 620 - chara.h/2;
+    }
+    else if(nowchar == 4){
+        chara.y = 910 - chara.h/2;
+    }
+    if(nowchar==1)chara.dir = true;
+    else chara.dir = false;
 }
+
 void charater_process(ALLEGRO_EVENT event){
+
     if( event.type == ALLEGRO_EVENT_KEY_DOWN )
-        if( event.keyboard.keycode == ALLEGRO_KEY_P )
+        if( event.keyboard.keycode == ALLEGRO_KEY_A && !bubble)
+            A++;
+        else if( event.keyboard.keycode == ALLEGRO_KEY_D && !bubble)
+            D++;
+        else if( event.keyboard.keycode == ALLEGRO_KEY_P)
         {
             judge_next_window = true;
-            next = SCENE_PAUSE;
+            next=SCENE_PAUSE;
         }
-        else if( event.keyboard.keycode == ALLEGRO_KEY_A && !bubble)
-            A = true;
-        else if( event.keyboard.keycode == ALLEGRO_KEY_D && !bubble)
-            D = true;
         else if( event.keyboard.keycode == ALLEGRO_KEY_J )
         {
+            spause = al_load_bitmap("./image/smallpause.png");
+            al_draw_bitmap(spause, 32, 2, 0);
+            al_flip_display();
             pause=!pause;
             if(pause)
             {
@@ -45,6 +61,11 @@ void charater_process(ALLEGRO_EVENT event){
                     position=al_get_sample_instance_position(sample_instance12);
                     al_stop_timer(fps);
                     al_stop_sample_instance(sample_instance12);
+                }else if(level==3)
+                {
+                    position=al_get_sample_instance_position(sample_instance13);
+                    al_stop_timer(fps);
+                    al_stop_sample_instance(sample_instance13);
                 }
             }
             else
@@ -61,22 +82,44 @@ void charater_process(ALLEGRO_EVENT event){
                     al_start_timer(fps);
                     al_play_sample_instance(sample_instance12);
                 }
+                else if(level==3)
+                {
+                    al_set_sample_instance_position(sample_instance13,position);
+                    al_start_timer(fps);
+                    al_play_sample_instance(sample_instance13);
+                }
             }
         }
+    /*else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+            mouse_state[event.mouse.button] = true;
+			on_mouse_down(event.mouse.button, event.mouse.x, event.mouse.y);
+    }
+    else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+			mouse_state[event.mouse.button] = false;
+    }
+    else if (event.type == ALLEGRO_EVENT_MOUSE_AXES) {
+        if (event.mouse.dx != 0 || event.mouse.dy != 0) {
+            mouse_x = event.mouse.x;
+            mouse_y = event.mouse.y;
+        }
+    }*/
 }
+
 void charater_update(){
     // use the idea of finite state machine to deal with different state
     if( A ){
-        chara.dir = false;
+        if(nowchar!=1)chara.dir = false;
+        else chara.dir = true;
         if(chara.x>LEFT - chara.w/2)
             chara.x -= 180;
-        A = false;
+        A --;
     }
     else if( D ){
-        chara.dir = true;
+        if(nowchar==1)chara.dir = false;
+        else chara.dir = true;
         if(chara.x < RIGHT - chara.w/2)
             chara.x += 180;
-        D = false;
+        D --;
     }
 }
 void character_draw(){
@@ -88,5 +131,5 @@ void character_draw(){
 }
 void character_destory(){
     al_destroy_bitmap(chara.img_move);
-    ///al_destroy_bitmap(spause);
+    al_destroy_bitmap(spause);
 }

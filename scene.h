@@ -7,6 +7,7 @@ void menu_init();
 void menu_draw();
 void menu_destroy();
 
+
 void game_scene2_init();
 void game_scene2_draw();
 void game_scene2_destroy();
@@ -46,6 +47,5 @@ void game_scene10_init();
 void game_scene10_draw();
 void game_scene10_destroy();
 
-void on_mouse_down(int btn, int x, int y);
-bool pnt_in_rect(int px, int py, int x, int y, int w, int h);
+
 

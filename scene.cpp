@@ -1,7 +1,5 @@
 #include "scene.h"
 
-int mouse_x, mouse_y;
-
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_BITMAP *V = NULL;
 ALLEGRO_BITMAP *get = NULL;
@@ -207,6 +205,13 @@ void on_mouse_down(int btn, int x, int y) {
                 next=SCENE_GAME;
             }
         }
+        /*else if (window==SCENE_GAME)
+        {
+            if (pnt_in_rect(x, y, 0, 0, 100, 100)){
+                judge_next_window = true;
+                next=SCENE_PAUSE;
+            }
+        }*/
 	}
 }
 
@@ -225,6 +230,7 @@ void game_scene2_init(){
     al_stop_sample_instance(sample_instance);
     if(level==1)al_play_sample_instance(sample_instance11);
     else if(level==2)al_play_sample_instance(sample_instance12);
+    else if(level==3)al_play_sample_instance(sample_instance13);
 
     character_init();
     nose_init();
@@ -313,6 +319,7 @@ void game_scene6_destroy(){
 void game_scene7_init(){
     al_stop_sample_instance(sample_instance11);
     al_stop_sample_instance(sample_instance12);
+    al_stop_sample_instance(sample_instance13);
     background = al_load_bitmap("./image/Pause.png");
 }
 void game_scene7_draw(){

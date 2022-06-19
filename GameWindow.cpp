@@ -92,6 +92,17 @@ void game_begin() {
     // set the volume of instance
     al_set_sample_instance_gain(sample_instance12, 1) ;
 
+    // Load sound1-3
+    song13 = al_load_sample("./sound/1-3.wav");
+    al_reserve_samples(20);
+    sample_instance13 = al_create_sample_instance(song13);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance13, ALLEGRO_PLAYMODE_ONCE);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance13, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance13, 1) ;
+
     al_start_timer(fps);
     // initialize the menu before entering the loop
     menu_init();
@@ -163,12 +174,12 @@ void game_update(){
                 judge_next_window = false;
                 window = SCENE_PAUSE;
             }
-            /*else if(next==SCENE_WIN)
+            else if(next==SCENE_WIN)
             {
                 game_scene8_init();
                 judge_next_window = false;
                 window = SCENE_WIN;
-            }*/
+            }
             else if(next==SCENE_LOSE)
             {
                 game_scene9_init();
@@ -288,6 +299,7 @@ void game_destroy() {
     al_destroy_sample_instance(sample_instance);
     al_destroy_sample_instance(sample_instance11);
     al_destroy_sample_instance(sample_instance12);
+    al_destroy_sample_instance(sample_instance13);
     menu_destroy();
     game_scene2_destroy();
     game_scene3_destroy();
