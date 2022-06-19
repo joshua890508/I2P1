@@ -92,6 +92,8 @@ extern ALLEGRO_SAMPLE*click;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instanceclick;
 extern ALLEGRO_SAMPLE*fir;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instancefire;
+extern ALLEGRO_SAMPLE*nos;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancenose;
 
 extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;

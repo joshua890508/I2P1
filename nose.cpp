@@ -112,6 +112,7 @@ void nose_update(){
                             al_play_sample_instance(sample_instancecoin);
                             coin+=3;
                         }
+                        else al_play_sample_instance(sample_instancenose);
                     }
                     else if(level == 2 || level == 3)
                     {
@@ -139,6 +140,7 @@ void nose_update(){
                             bubble=true;
                             startbubble=i;
                         }
+                        else al_play_sample_instance(sample_instancenose);
                         if(star)
                         {
                             if(nose[i].type!=2)

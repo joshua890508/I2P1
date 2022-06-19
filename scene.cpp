@@ -302,6 +302,11 @@ void game_scene2_init(){
     al_set_sample_instance_playmode(sample_instancefire, ALLEGRO_PLAYMODE_ONCE);
     al_attach_sample_instance_to_mixer(sample_instancefire, al_get_default_mixer());
     al_set_sample_instance_gain(sample_instancefire, 2) ;
+
+    nos = al_load_sample("./sound/nose.mp3");
+    sample_instancenose  = al_create_sample_instance(nos);
+    al_set_sample_instance_playmode(sample_instancenose, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancenose, al_get_default_mixer());
 }
 void game_scene2_draw(){
     if(!star)al_draw_bitmap(background, 0, 0, 0);
