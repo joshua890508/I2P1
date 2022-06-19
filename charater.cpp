@@ -1,32 +1,22 @@
 #include "charater.h"
 
-char temp[50];
+char cha[50];
 unsigned int position;
 int A=0,D=0;
 ALLEGRO_BITMAP *spause = NULL;
 
 void character_init(){
     // load character images
-    //sprintf( temp, "./image/chara%d 0.png", nowchar );
-    sprintf( temp, "./image/%d.png", nowchar );
-    chara.img_move = al_load_bitmap(temp);
-
+    sprintf( cha, "./image/%d-%d-0.png", nowchar , nowitem );
+    chara.img_move = al_load_bitmap(cha);
     // initial the geometric information of character
     chara.w = al_get_bitmap_width(chara.img_move);
     chara.h = al_get_bitmap_height(chara.img_move);
     chara.x = MIDDLE - chara.w/2;
-    if(nowchar == 1){
-        chara.y = 650 - chara.h/2;
-    }
-    else if(nowchar == 2){
-        chara.y = 750 - chara.h/2;
-    }
-    else if(nowchar == 3){
-        chara.y = 620 - chara.h/2;
-    }
-    else if(nowchar == 4){
-        chara.y = 910 - chara.h/2;
-    }
+    if(nowchar == 1)chara.y = 419;
+    else if(nowchar == 2)chara.y = 629;
+    else if(nowchar == 3)chara.y = 395;
+    else if(nowchar == 4)chara.y = 634;
     if(nowchar==1)chara.dir = true;
     else chara.dir = false;
 }

@@ -1,5 +1,5 @@
 #include "nose.h"
-
+char ch[50];
 int startstar;
 int startbubble;
 int min=0, max;
@@ -136,30 +136,11 @@ void nose_update(){
                             }
                         }
                     }
-                    if(nowchar==1)
-                    {
-                        if(score>=60)chara.img_move = al_load_bitmap("./image/ele3.png");
-                        else if(score>=40)chara.img_move = al_load_bitmap("./image/ele2.png");
-                        else if(score>=20)chara.img_move = al_load_bitmap("./image/ele1.png");
-                    }
-                    else if(nowchar==2)
-                    {
-                        if(score>=60)chara.img_move = al_load_bitmap("./image/g3.png");
-                        else if(score>=40)chara.img_move = al_load_bitmap("./image/g2.png");
-                        else if(score>=20)chara.img_move = al_load_bitmap("./image/g1.png");
-                    }
-                    else if(nowchar==3)
-                    {
-                        if(score>=60)chara.img_move = al_load_bitmap("./image/p3.png");
-                        else if(score>=40)chara.img_move = al_load_bitmap("./image/p2.png");
-                        else if(score>=20)chara.img_move = al_load_bitmap("./image/p1.png");
-                    }
-                    else if(nowchar==4)
-                    {
-                        if(score>=60)chara.img_move = al_load_bitmap("./image/longdog3.png");
-                        else if(score>=40)chara.img_move = al_load_bitmap("./image/longdog2.png");
-                        else if(score>=20)chara.img_move = al_load_bitmap("./image/longdog1.png");
-                    }
+                    if(score>=60)sprintf( ch, "./image/%d-%d-3.png", nowchar , nowitem );
+                    else if(score>=40&&score<60)sprintf( ch, "./image/%d-%d-2.png", nowchar , nowitem );
+                    else if(score>=20&&score<40)sprintf( ch, "./image/%d-%d-1.png", nowchar , nowitem );
+                    else sprintf( ch, "./image/%d-%d-0.png", nowchar , nowitem );
+                    chara.img_move = al_load_bitmap(ch);
                 }
                 if(i == 13)//last nose
                 {
