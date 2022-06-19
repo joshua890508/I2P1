@@ -1,6 +1,8 @@
 #include "scene.h"
 
 ALLEGRO_BITMAP *background = NULL;
+ALLEGRO_BITMAP *win_anim_background = NULL;
+ALLEGRO_BITMAP *lose_anim_background = NULL;
 ALLEGRO_BITMAP *V = NULL;
 ALLEGRO_BITMAP *get = NULL;
 ALLEGRO_BITMAP *starr = NULL;
@@ -256,6 +258,8 @@ void on_mouse_down(int btn, int x, int y) {
 }
 
 void menu_init(){
+
+
     background = al_load_bitmap("./image/Menu.png");
     al_play_sample_instance(sample_instance);
 }
@@ -401,21 +405,39 @@ void game_scene7_destroy(){
 
 void game_scene8_init(){
     background = al_load_bitmap("./image/Win.jpg");
-}
-void game_scene8_draw(){
-    al_draw_bitmap(background, 0, 0, 0);
-}
-void game_scene8_destroy(){
-    al_destroy_bitmap(background);
+    win_gif->start_time = al_get_time();
 }
 
+void game_scene8_draw(){
+    win_anim_background = algif_get_bitmap(win_gif->anim, win_gif->get_time(al_get_time()));
+    if (win_gif->get_time(al_get_time())<4.5){
+        al_draw_bitmap(win_anim_background, 0, 0, 0);
+    } else {
+        al_draw_bitmap(background, 0, 0, 0);
+    }
+}
+void game_scene8_destroy(){
+    algif_destroy_animation(win_gif->anim);
+    free(win_gif);
+    al_destroy_bitmap(win_anim_background);
+    al_destroy_bitmap(background);
+}
 void game_scene9_init(){
     background = al_load_bitmap("./image/Lose.jpg");
+    lose_gif->start_time = al_get_time();
 }
 void game_scene9_draw(){
-    al_draw_bitmap(background, 0, 0, 0);
+    lose_anim_background = algif_get_bitmap(lose_gif->anim, lose_gif->get_time(al_get_time()));
+    if (lose_gif->get_time(al_get_time())<4.5){
+        al_draw_bitmap(lose_anim_background, 0, 0, 0);
+    } else {
+        al_draw_bitmap(background, 0, 0, 0);
+    }
 }
 void game_scene9_destroy(){
+    algif_destroy_animation(lose_gif->anim);
+    free(lose_gif);
+    al_destroy_bitmap(lose_anim_background);
     al_destroy_bitmap(background);
 }
 

@@ -72,7 +72,7 @@ void nose_init()
             max = 2;
             nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
             nose[i].y = 100 - nose[i].h/2;
-            nose[i].v = 7;
+            nose[i].v = 9;
             nose[i].hidden = true;
         }
     }

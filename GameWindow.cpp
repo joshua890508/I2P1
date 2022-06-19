@@ -54,6 +54,12 @@ void game_init() {
     // initialize the icon on the display
     ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.png");
     al_set_display_icon(display, icon);
+
+    // preload animation for scene8&9
+    win_gif = (GIF*)malloc(sizeof(GIF));
+    win_gif->anim = algif_load_animation("./image/win_anim.gif");
+    lose_gif = (GIF*)malloc(sizeof(GIF));
+    lose_gif->anim = algif_load_animation("./image/lose_anim.gif");
 }
 
 void game_begin() {

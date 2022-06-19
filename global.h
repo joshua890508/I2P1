@@ -1,6 +1,7 @@
 #ifndef GLOBAL_H_INCLUDED
 #define GLOBAL_H_INCLUDED
 #define GAME_TERMINATE -1
+#include "algif5/src/algif.h"
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -9,6 +10,7 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+
 enum {
 	SCENE_MENU = 1,
 	SCENE_GAME = 2,
@@ -37,6 +39,17 @@ typedef struct
 extern MovableObject chara;
 extern MovableObject nose[100];
 extern MovableObject fire[6];
+
+typedef struct _GIF {
+    double start_time = 0.0;
+    ALGIF_ANIMATION *anim = NULL;
+    double get_time(double time) {
+        if (start_time == 0) start_time = time;
+        return time - start_time;
+    }
+} GIF;
+extern GIF *win_gif;
+extern GIF *lose_gif;
 
 // note that you can't assign initial value here!
 extern const float FPS;
