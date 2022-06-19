@@ -38,12 +38,12 @@ void charater_process(ALLEGRO_EVENT event){
             A++;
         else if( event.keyboard.keycode == ALLEGRO_KEY_D && !bubble)
             D++;
-        else if( event.keyboard.keycode == ALLEGRO_KEY_P)
+        else if( event.keyboard.keycode == ALLEGRO_KEY_F)
         {
             judge_next_window = true;
             next=SCENE_PAUSE;
         }
-        else if( event.keyboard.keycode == ALLEGRO_KEY_J )
+        else if( event.keyboard.keycode == ALLEGRO_KEY_P )
         {
             spause = al_load_bitmap("./image/smallpause.png");
             al_draw_bitmap(spause, 32, 2, 0);

@@ -195,9 +195,18 @@ void nose_draw(){
     sprintf(s, "%d", score);
     sprintf(c, "%d", coin);
     sprintf(l, "%d", level);
-    al_draw_text(font, al_map_rgb(0,0,0), 350, 50, 0, s);
-    al_draw_text(font, al_map_rgb(0,0,0), 520, 50, 0, c);
-    al_draw_text(font, al_map_rgb(0,0,0), 200, 55, 0, l);
+    if(star)
+    {
+        al_draw_text(font, al_map_rgb(255,255,255), 350, 50, 0, s);
+        al_draw_text(font, al_map_rgb(255,255,255), 520, 50, 0, c);
+        al_draw_text(font, al_map_rgb(255,255,255), 200, 55, 0, l);
+    }
+    else{
+        al_draw_text(font, al_map_rgb(0,0,0), 350, 50, 0, s);
+        al_draw_text(font, al_map_rgb(0,0,0), 520, 50, 0, c);
+        al_draw_text(font, al_map_rgb(0,0,0), 200, 55, 0, l);
+    }
+
 }
 
 void nose_destory(){

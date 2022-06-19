@@ -3,6 +3,7 @@
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_BITMAP *V = NULL;
 ALLEGRO_BITMAP *get = NULL;
+ALLEGRO_BITMAP *starr = NULL;
 
 bool pnt_in_rect(int px, int py, int x, int y, int w, int h) {
 	if (px < w && py > y) {
@@ -216,7 +217,7 @@ void on_mouse_down(int btn, int x, int y) {
 }
 
 void menu_init(){
-    background = al_load_bitmap("./image/Menu (2).jpg");
+    background = al_load_bitmap("./image/Menu.png");
     al_play_sample_instance(sample_instance);
 }
 void menu_draw(){
@@ -234,12 +235,12 @@ void game_scene2_init(){
 
     character_init();
     nose_init();
-    background = al_load_bitmap("./image/Menu (2).jpg");
-
+    background = al_load_bitmap("./image/Game_backgound.png");
+    starr = al_load_bitmap("./image/starr.png");
 }
 void game_scene2_draw(){
-    background = al_load_bitmap("./image/Game_backgound.png");
-    al_draw_bitmap(background, 0, 0, 0);
+    if(!star)al_draw_bitmap(background, 0, 0, 0);
+    else al_draw_bitmap(starr, 0, 0, 0);
     character_draw();
     nose_draw();
 }
