@@ -2,7 +2,7 @@
 
 char cha[50];
 unsigned int position;
-int A=0,D=0;
+bool A=false,D=false;
 ALLEGRO_BITMAP *spause = NULL;
 
 void character_init(){
@@ -25,9 +25,9 @@ void charater_process(ALLEGRO_EVENT event){
 
     if( event.type == ALLEGRO_EVENT_KEY_DOWN )
         if( event.keyboard.keycode == ALLEGRO_KEY_A && !bubble)
-            A++;
+            A=true;
         else if( event.keyboard.keycode == ALLEGRO_KEY_D && !bubble)
-            D++;
+            D=true;
         else if( event.keyboard.keycode == ALLEGRO_KEY_F)
         {
             judge_next_window = true;
@@ -91,19 +91,6 @@ void charater_process(ALLEGRO_EVENT event){
                 }
             }
         }
-    /*else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            mouse_state[event.mouse.button] = true;
-			on_mouse_down(event.mouse.button, event.mouse.x, event.mouse.y);
-    }
-    else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-			mouse_state[event.mouse.button] = false;
-    }
-    else if (event.type == ALLEGRO_EVENT_MOUSE_AXES) {
-        if (event.mouse.dx != 0 || event.mouse.dy != 0) {
-            mouse_x = event.mouse.x;
-            mouse_y = event.mouse.y;
-        }
-    }*/
 }
 
 void charater_update(){
@@ -113,14 +100,14 @@ void charater_update(){
         else chara.dir = true;
         if(chara.x>LEFT - chara.w/2)
             chara.x -= 180;
-        A --;
+        A=false;
     }
     else if( D ){
         if(nowchar==1)chara.dir = false;
         else chara.dir = true;
         if(chara.x < RIGHT - chara.w/2)
             chara.x += 180;
-        D --;
+        D=false;
     }
 }
 void character_draw(){
