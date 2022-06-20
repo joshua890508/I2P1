@@ -53,7 +53,7 @@ bool pause = false;
 int next = 0;
 int score;
 char s[20];
-int coin = 0;
+int coin = 500;
 char c[20];
 int level = 1;
 char l[20];

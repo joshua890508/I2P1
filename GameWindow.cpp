@@ -96,7 +96,7 @@ void game_begin() {
     al_restore_default_mixer();
     al_attach_sample_instance_to_mixer(sample_instance12, al_get_default_mixer());
     // set the volume of instance
-    al_set_sample_instance_gain(sample_instance12, 1) ;
+    al_set_sample_instance_gain(sample_instance12, 2) ;
 
     // Load sound1-3
     song13 = al_load_sample("./sound/1-3.wav");
