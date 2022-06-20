@@ -258,8 +258,6 @@ void on_mouse_down(int btn, int x, int y) {
 }
 
 void menu_init(){
-
-
     background = al_load_bitmap("./image/Menu.png");
     al_play_sample_instance(sample_instance);
 }
@@ -411,11 +409,18 @@ void game_scene7_destroy(){
 void game_scene8_init(){
     background = al_load_bitmap("./image/Win.jpg");
     win_gif->start_time = al_get_time();
+
+
+    win = al_load_sample("./sound/win_bgm.wav");
+    sample_instancewin  = al_create_sample_instance(win);
+    al_set_sample_instance_playmode(sample_instancewin, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancewin, al_get_default_mixer());
+    al_play_sample_instance(sample_instancewin);
 }
 
 void game_scene8_draw(){
     win_anim_background = algif_get_bitmap(win_gif->anim, win_gif->get_time(al_get_time()));
-    if (win_gif->get_time(al_get_time())<4.5){
+    if (win_gif->get_time(al_get_time())<7){
         al_draw_bitmap(win_anim_background, 0, 0, 0);
     } else {
         al_draw_bitmap(background, 0, 0, 0);
@@ -426,14 +431,21 @@ void game_scene8_destroy(){
     free(win_gif);
     al_destroy_bitmap(win_anim_background);
     al_destroy_bitmap(background);
+    al_destroy_sample_instance(sample_instancewin);
 }
 void game_scene9_init(){
     background = al_load_bitmap("./image/Lose.jpg");
     lose_gif->start_time = al_get_time();
+
+    lose = al_load_sample("./sound/lose_bgm.wav");
+    sample_instancelose  = al_create_sample_instance(lose);
+    al_set_sample_instance_playmode(sample_instancelose, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancelose, al_get_default_mixer());
+    al_play_sample_instance(sample_instancelose);
 }
 void game_scene9_draw(){
     lose_anim_background = algif_get_bitmap(lose_gif->anim, lose_gif->get_time(al_get_time()));
-    if (lose_gif->get_time(al_get_time())<4.5){
+    if (lose_gif->get_time(al_get_time())<5){
         al_draw_bitmap(lose_anim_background, 0, 0, 0);
     } else {
         al_draw_bitmap(background, 0, 0, 0);
@@ -444,6 +456,7 @@ void game_scene9_destroy(){
     free(lose_gif);
     al_destroy_bitmap(lose_anim_background);
     al_destroy_bitmap(background);
+    al_destroy_sample_instance(sample_instancelose);
 }
 
 void game_scene10_init(){

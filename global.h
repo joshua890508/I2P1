@@ -94,6 +94,10 @@ extern ALLEGRO_SAMPLE*fir;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instancefire;
 extern ALLEGRO_SAMPLE*nos;
 extern ALLEGRO_SAMPLE_INSTANCE*sample_instancenose;
+extern ALLEGRO_SAMPLE*win;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancewin;
+extern ALLEGRO_SAMPLE*lose;
+extern ALLEGRO_SAMPLE_INSTANCE*sample_instancelose;
 
 extern ALLEGRO_DISPLAY*display;
 extern ALLEGRO_FONT *font;

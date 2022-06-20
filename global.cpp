@@ -32,6 +32,10 @@ ALLEGRO_SAMPLE*fir=NULL;
 ALLEGRO_SAMPLE_INSTANCE*sample_instancefire;
 ALLEGRO_SAMPLE*nos=NULL;
 ALLEGRO_SAMPLE_INSTANCE*sample_instancenose;
+ALLEGRO_SAMPLE*win=NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instancewin;
+ALLEGRO_SAMPLE*lose=NULL;
+ALLEGRO_SAMPLE_INSTANCE*sample_instancelose;
 
 GIF *win_gif;
 GIF *lose_gif;
@@ -47,7 +51,7 @@ int score;
 char s[20];
 int coin = 0;
 char c[20];
-int level = 3;
+int level = 1;
 char l[20];
 
 int nowchar = 1;
