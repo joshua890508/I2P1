@@ -273,11 +273,18 @@ void game_scene2_init(){
     if(level==1)al_play_sample_instance(sample_instance11);
     else if(level==2)al_play_sample_instance(sample_instance12);
     else if(level==3)al_play_sample_instance(sample_instance13);
+    else if(level==4)al_play_sample_instance(sample_instance14);
 
     character_init();
     nose_init();
     background = al_load_bitmap("./image/Game_backgound.png");
     starr = al_load_bitmap("./image/starr.png");
+
+    bonkk = al_load_sample("./sound/bonk.wav");
+    sample_instancebonk  = al_create_sample_instance(bonkk);
+    al_set_sample_instance_playmode(sample_instancebonk, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(sample_instancebonk, al_get_default_mixer());
+    al_set_sample_instance_gain(sample_instancebonk, 3) ;
 
     bubblee = al_load_sample("./sound/bubble.wav");
     sample_instancebubble  = al_create_sample_instance(bubblee);
@@ -360,7 +367,6 @@ void game_scene5_draw(){
     if(longneck)al_draw_bitmap(get, 262,472, 0);
     if(penguin)al_draw_bitmap(get, 400, 472, 0);
     if(dog)al_draw_bitmap(get, 130, 641, 0);
-
 }
 void game_scene5_destroy(){
     al_destroy_bitmap(background);
@@ -397,6 +403,7 @@ void game_scene7_init(){
     al_stop_sample_instance(sample_instance11);
     al_stop_sample_instance(sample_instance12);
     al_stop_sample_instance(sample_instance13);
+    al_stop_sample_instance(sample_instance14);
     background = al_load_bitmap("./image/Pause.png");
 }
 void game_scene7_draw(){

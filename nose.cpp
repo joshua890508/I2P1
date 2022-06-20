@@ -2,10 +2,13 @@
 char ch[50];
 int startstar;
 int startbubble;
+int startbonk;
 int min=0, max;
+bool bonk = false;
 
 void nose_init()
 {
+    bonk = false;
     star=false;
     bubble=false;
     score = 0;
@@ -54,8 +57,8 @@ void nose_init()
             nose[i].h = al_get_bitmap_height(nose[i].img_move);
             max = 2;
             nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
-            nose[i].y = 100.1 - nose[i].h/2;
-            nose[i].v = 7.9;
+            nose[i].y = 101 - nose[i].h/2;
+            nose[i].v = 7.91;
             nose[i].hidden = true;
         }
         else if(level==3)
@@ -75,6 +78,24 @@ void nose_init()
             nose[i].v = 8.6;
             nose[i].hidden = true;
         }
+        else if(level==4)
+        {
+            max = 7;
+            nose[i].type=rand() % (max - min + 1) + min;
+            if(nose[i].type==0)nose[i].img_move = al_load_bitmap("./image/coin.png");
+            else if(nose[i].type==1)nose[i].img_move = al_load_bitmap("./image/star.png");
+            else if(nose[i].type==2)nose[i].img_move = al_load_bitmap("./image/bubble.png");
+            else if(nose[i].type==3)nose[i].img_move = al_load_bitmap("./image/bat.png");
+            else nose[i].img_move = al_load_bitmap("./image/nose.png");
+            // initial the geometric information of character
+            nose[i].w = al_get_bitmap_width(nose[i].img_move);
+            nose[i].h = al_get_bitmap_height(nose[i].img_move);
+            max = 2;
+            nose[i].x = LEFT + 180*( rand() % (max - min + 1) + min) - nose[i].w/2;
+            nose[i].y = 100 - nose[i].h/2;
+            nose[i].v = 12.5;
+            nose[i].hidden = true;
+        }
     }
     nose[0].hidden = false;//first nose
 }
@@ -84,7 +105,7 @@ void nose_update(){
     {
         if (!nose[i].hidden)
         {
-            if(level==3)
+            if(level==3 || level==4)
             {
                 if(i==2)fire[0].hidden=false;
                 else if(i==5)fire[1].hidden=false;
@@ -98,6 +119,7 @@ void nose_update(){
                 nose[i+1].hidden=false;
                 if(star && i == startstar + 4)star=false;
                 if(bubble && i == startbubble + 3)bubble=false;
+                if(bonk && i == startbonk + 3)bonk=false;
              }
             else if (nose[i].y>=550 && nose[i].y<=580)//same y position
             {
@@ -150,18 +172,68 @@ void nose_update(){
                             }
                         }
                     }
-                    if(score>=65)sprintf( ch, "./image/%d-%d-3.png", nowchar , nowitem );
-                    else if(score>=40&&score<65)sprintf( ch, "./image/%d-%d-2.png", nowchar , nowitem );
-                    else if(score>=20&&score<40)sprintf( ch, "./image/%d-%d-1.png", nowchar , nowitem );
-                    else sprintf( ch, "./image/%d-%d-0.png", nowchar , nowitem );
+                    else if(level == 4)
+                    {
+                        if(bubble)
+                        {
+                            score-=5;
+                            if(nose[i].type==0)coin+=3;
+                        }
+                        score+=5;
+                        if(nose[i].type==0)
+                        {
+                            al_play_sample_instance(sample_instancecoin);
+                            coin+=3;
+                        }
+                        else if(nose[i].type==1)
+                        {
+                            al_play_sample_instance(sample_instancestar);
+                            star=true;
+                            startstar=i;
+                        }
+                        else if(nose[i].type==2)
+                        {
+                            al_play_sample_instance(sample_instancebubble);
+                            score-=5;
+                            bubble=true;
+                            startbubble=i;
+                        }
+                        else if(nose[i].type==3)
+                        {
+                            al_play_sample_instance(sample_instancebonk);
+                            score=0;
+                            bonk=true;
+                            startbonk=i;
+                        }
+                        else al_play_sample_instance(sample_instancenose);
+                        if(star)
+                        {
+                            if(nose[i].type!=2)
+                            {
+                                score+=5;
+                                if(nose[i].type==0)coin+=3;
+                            }
+                        }
+                    }
+                    if(!bonk)
+                    {
+                        if(score>=65)sprintf( ch, "./image/%d-%d-3.png", nowchar , nowitem );
+                        else if(score>=40&&score<65)sprintf( ch, "./image/%d-%d-2.png", nowchar , nowitem );
+                        else if(score>=20&&score<40)sprintf( ch, "./image/%d-%d-1.png", nowchar , nowitem );
+                        else sprintf( ch, "./image/%d-%d-0.png", nowchar , nowitem );
+                    }
+                    else
+                        sprintf( ch, "./image/%d-0.png", nowchar , nowitem );
+
                     chara.img_move = al_load_bitmap(ch);
+
                 }
                 if(i == 13)//last nose
                 {
                     judge_next_window=true;
                     if(score >= 60)
                     {
-                        if(level!=3)next = SCENE_LEVELUP,level++;
+                        if(level!=4)next = SCENE_LEVELUP,level++;
                         else next = SCENE_WIN,level=1;
                     }
                     else next = SCENE_LOSE;

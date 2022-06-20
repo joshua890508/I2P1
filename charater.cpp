@@ -56,6 +56,11 @@ void charater_process(ALLEGRO_EVENT event){
                     position=al_get_sample_instance_position(sample_instance13);
                     al_stop_timer(fps);
                     al_stop_sample_instance(sample_instance13);
+                }else if(level==4)
+                {
+                    position=al_get_sample_instance_position(sample_instance14);
+                    al_stop_timer(fps);
+                    al_stop_sample_instance(sample_instance14);
                 }
             }
             else
@@ -77,6 +82,12 @@ void charater_process(ALLEGRO_EVENT event){
                     al_set_sample_instance_position(sample_instance13,position);
                     al_start_timer(fps);
                     al_play_sample_instance(sample_instance13);
+                }
+                else if(level==4)
+                {
+                    al_set_sample_instance_position(sample_instance14,position);
+                    al_start_timer(fps);
+                    al_play_sample_instance(sample_instance14);
                 }
             }
         }
